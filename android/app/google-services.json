@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "440785840454",
-    "project_id": "smart-fit-on",
-    "storage_bucket": "smart-fit-on.appspot.com"
+    "project_number": "970999155967",
+    "project_id": "smart-fit-on-f7434",
+    "storage_bucket": "smart-fit-on-f7434.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:440785840454:android:5f0e0a2ff1564f6f125d47",
+        "mobilesdk_app_id": "1:970999155967:android:79cf31e41a3bfafa1ed0ca",
         "android_client_info": {
           "package_name": "com.example.smart_fit_on"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAgYm8q9t_mNlLsVEx4IvrNxJQfhQ4Salk"
+          "current_key": "AIzaSyAnTXupBLJjxEuishQdhAgMixz4QGDoi0w"
         }
       ],
       "services": {

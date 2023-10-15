@@ -2,7 +2,7 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-    id 'com.google.gms.google-services'
+    
 }
 
 def localProperties = new Properties()
@@ -24,6 +24,10 @@ if (flutterVersionName == null) {
 }
 
 android {
+
+    lint {
+          baseline = file("lint-baseline.xml")
+      }
     namespace "com.example.smart_fit_on"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
@@ -46,8 +50,8 @@ android {
         applicationId "com.example.smart_fit_on"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdkVersion 31
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true

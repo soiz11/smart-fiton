@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smart_fit_on/views/cus_screens/cus_screens.dart';
+import 'package:smart_fit_on/views/authentication/login.dart';
+//import 'package:smart_fit_on/views/cus_screens/cus_screens.dart';
 
 class Authenticate extends StatefulWidget {
   const Authenticate({super.key});
@@ -12,7 +13,7 @@ class _AuthenticateState extends State<Authenticate> {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: CusScreens(),
+      home: Login(),
     );
   }
 }
