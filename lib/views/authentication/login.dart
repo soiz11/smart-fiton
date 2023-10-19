@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:smart_fit_on/views/components/custom_text_feild.dart';
+import 'dart:developer' as dev;
+
+import 'package:smart_fit_on/views/components/long_btn.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -9,8 +13,9 @@ class Login extends StatefulWidget {
 }
 
 final _formKey = GlobalKey<FormState>();
-String email = "";
-String password = "";
+
+String emailFieldValue = '';
+String passwordFieldValue = '';
 
 class _LoginState extends State<Login> {
   @override
@@ -58,7 +63,7 @@ class _LoginState extends State<Login> {
                       child: Column(
                         children: [
                           //email_feild
-                          TextFormField(
+                          /*TextFormField(
                             decoration: InputDecoration(
                               enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
@@ -80,10 +85,10 @@ class _LoginState extends State<Login> {
                             },
                           ),
 
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 10),*/
 
                           //password_feild
-                          TextFormField(
+                          /* TextFormField(
                             decoration: InputDecoration(
                               enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
@@ -103,6 +108,42 @@ class _LoginState extends State<Login> {
                                 password = val;
                               });
                             },
+                          ),*/
+
+                          const SizedBox(height: 10),
+
+                          CustomTextField(
+                            hintText: 'Username',
+                            validator: (String? val) {
+                              return val?.isEmpty == true
+                                  ? "Enter a valid email"
+                                  : null;
+                            },
+                            onChanged: (value) {
+                              setState(() {
+                                emailFieldValue = value;
+                                // ignore: avoid_print
+                                dev.log('Email Field Value: $emailFieldValue');
+                              });
+                            },
+                          ),
+
+                          const SizedBox(height: 10),
+
+                          CustomTextField(
+                            hintText: 'Password',
+                            validator: (val) {
+                              return val!.length < 7
+                                  ? "Enter a password with at least 6 characters"
+                                  : null;
+                            },
+                            onChanged: (value) {
+                              setState(() {
+                                passwordFieldValue = value;
+                                dev.log(
+                                    'Password Field Value: $passwordFieldValue');
+                              });
+                            },
                           ),
                         ],
                       ),
@@ -112,6 +153,8 @@ class _LoginState extends State<Login> {
                   const SizedBox(height: 15),
 
                   //login button
+
+                  /* 
                   Container(
                     padding: const EdgeInsets.all(15),
                     margin: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -129,6 +172,14 @@ class _LoginState extends State<Login> {
                             fontSize: 22),
                       ),
                     ),
+                  ),
+*/
+
+                  LongBtn(
+                    btnColor: HexColor("#5ebf00"),
+                    btnText: "LOGIN",
+                    btnTextColor: Colors.white,
+                    isBorderRequired: false,
                   ),
 
                   const SizedBox(height: 15),
