@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
+
 import 'package:smart_fit_on/views/components/custom_text_feild.dart';
 import 'dart:developer' as dev;
 
 import 'package:smart_fit_on/views/components/long_btn.dart';
+import 'package:smart_fit_on/assets/colors/colors.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -23,7 +24,7 @@ class _LoginState extends State<Login> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.grey[300],
+        backgroundColor: AppColors.bodyGrey,
         body: SafeArea(
           child: Center(
             child: SingleChildScrollView(
@@ -34,25 +35,25 @@ class _LoginState extends State<Login> {
                 children: [
                   //logo
 
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 0),
 
                   Image.asset(
-                    "assets/images/PIKDY.png",
+                    "lib/assets/images/PIKDY.png",
                     width: 200,
                   ),
 
                   const SizedBox(height: 10),
 
                   //welcome text
-                  Text(
+                  const Text(
                     "For an immersive shopping experience",
                     style: TextStyle(
-                        color: Colors.grey[700],
+                        color: AppColors.textGrey,
                         fontFamily: "secondary",
                         fontSize: 20),
                   ),
 
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 15),
 
                   //Text feilds
 
@@ -150,7 +151,7 @@ class _LoginState extends State<Login> {
                     ),
                   ),
 
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 20),
 
                   //login button
 
@@ -176,10 +177,11 @@ class _LoginState extends State<Login> {
 */
 
                   LongBtn(
-                    btnColor: HexColor("#5ebf00"),
+                    btnColor: AppColors.mainGreen,
                     btnText: "LOGIN",
                     btnTextColor: Colors.white,
                     isBorderRequired: false,
+                    onTap: () {},
                   ),
 
                   const SizedBox(height: 15),
@@ -199,10 +201,10 @@ class _LoginState extends State<Login> {
                           padding:
                               const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
                           child: GestureDetector(
-                            child: Text(
+                            child: const Text(
                               "Register",
                               style: TextStyle(
-                                  color: HexColor("#5ebf00"),
+                                  color: AppColors.mainGreen,
                                   fontFamily: "Secondary",
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18),

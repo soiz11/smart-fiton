@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_fit_on/models/UserModel.dart';
 import 'package:smart_fit_on/services/auth.dart';
-import 'package:smart_fit_on/views/authentication/login.dart';
+//import 'package:smart_fit_on/views/authentication/login.dart';
 //import 'package:smart_fit_on/views/authentication/login.dart';
 //import 'package:smart_fit_on/views/wrapper.dart';
 //import 'package:smart_fit_on/cus_bottomnavbar.dart';
 //import 'package:smart_fit_on/views/wrapper.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:smart_fit_on/views/authentication/login.dart';
+import 'package:smart_fit_on/views/authentication/register.dart';
 import 'firebase_options.dart';
 
 void main() async {

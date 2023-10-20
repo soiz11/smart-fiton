@@ -66,7 +66,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-   - assets/images/
+   - lib/assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -95,11 +95,11 @@ flutter:
   fonts:
     - family: Main
       fonts:
-        - asset: assets/fonts/BebasNeue-Regular.ttf
+        - asset: lib/assets/fonts/BebasNeue-Regular.ttf
 
     - family: Secondary
       fonts:
-        - asset: assets/fonts/Abel-Regular.ttf   
+        - asset: lib/assets/fonts/Abel-Regular.ttf   
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:smart_fit_on/assets/colors/colors.dart';
 
 class CustomTextField extends StatefulWidget {
   final String hintText;
@@ -25,13 +26,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return TextFormField(
       decoration: InputDecoration(
         enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
+          borderSide: BorderSide(color: Colors.white, width: 1.5),
         ),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: HexColor("#8bd840"))),
+        focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.borderGreen, width: 1.5)),
         hintText: widget.hintText,
         filled: true,
-        fillColor: HexColor("#ededed"),
+        fillColor: AppColors.fieldWhite,
       ),
       validator: widget.validator,
       onChanged: widget.onChanged,
