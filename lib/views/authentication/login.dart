@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:smart_fit_on/views/authentication/register.dart';
 
 import 'package:smart_fit_on/views/components/custom_text_feild.dart';
-import 'dart:developer' as dev;
 
+import 'dart:developer' as dev;
 import 'package:smart_fit_on/views/components/long_btn.dart';
 import 'package:smart_fit_on/assets/colors/colors.dart';
 
@@ -25,7 +26,10 @@ class _LoginState extends State<Login> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: AppColors.bodyGrey,
-        body: SafeArea(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 25.0,
+          ),
           child: Center(
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
@@ -59,122 +63,45 @@ class _LoginState extends State<Login> {
 
                   Form(
                     key: _formKey,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                      child: Column(
-                        children: [
-                          //email_feild
-                          /*TextFormField(
-                            decoration: InputDecoration(
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey.shade400)),
-                              hintText: "Username",
-                              filled: true,
-                              fillColor: Colors.grey[200],
-                            ),
-                            validator: (val) => val?.isEmpty == true
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          hintText: 'Username',
+                          validator: (String? val) {
+                            return val?.isEmpty == true
                                 ? "Enter a valid email"
-                                : null,
-                            onChanged: (val) {
-                              setState(() {
-                                email = val;
-                              });
-                            },
-                          ),
-
-                          const SizedBox(height: 10),*/
-
-                          //password_feild
-                          /* TextFormField(
-                            decoration: InputDecoration(
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey.shade400)),
-                              hintText: "Password",
-                              filled: true,
-                              fillColor: Colors.grey[200],
-                            ),
-                            validator: (val) => val!.length < 7
-                                ? "Enter a password with at least 6 charactors"
-                                : null,
-                            onChanged: (val) {
-                              setState(() {
-                                password = val;
-                              });
-                            },
-                          ),*/
-
-                          const SizedBox(height: 10),
-
-                          CustomTextField(
-                            hintText: 'Username',
-                            validator: (String? val) {
-                              return val?.isEmpty == true
-                                  ? "Enter a valid email"
-                                  : null;
-                            },
-                            onChanged: (value) {
-                              setState(() {
-                                emailFieldValue = value;
-                                // ignore: avoid_print
-                                dev.log('Email Field Value: $emailFieldValue');
-                              });
-                            },
-                          ),
-
-                          const SizedBox(height: 10),
-
-                          CustomTextField(
-                            hintText: 'Password',
-                            validator: (val) {
-                              return val!.length < 7
-                                  ? "Enter a password with at least 6 characters"
-                                  : null;
-                            },
-                            onChanged: (value) {
-                              setState(() {
-                                passwordFieldValue = value;
-                                dev.log(
-                                    'Password Field Value: $passwordFieldValue');
-                              });
-                            },
-                          ),
-                        ],
-                      ),
+                                : null;
+                          },
+                          onChanged: (value) {
+                            setState(() {
+                              emailFieldValue = value;
+                              // ignore: avoid_print
+                              dev.log('Email Field Value: $emailFieldValue');
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 10),
+                        CustomTextField(
+                          hintText: 'Password',
+                          validator: (val) {
+                            return val!.length < 7
+                                ? "Enter a password with at least 6 characters"
+                                : null;
+                          },
+                          onChanged: (value) {
+                            setState(() {
+                              passwordFieldValue = value;
+                              dev.log(
+                                  'Password Field Value: $passwordFieldValue');
+                            });
+                          },
+                        ),
+                      ],
                     ),
                   ),
 
                   const SizedBox(height: 20),
-
-                  //login button
-
-                  /* 
-                  Container(
-                    padding: const EdgeInsets.all(15),
-                    margin: const EdgeInsets.symmetric(horizontal: 25.0),
-                    decoration: BoxDecoration(
-                      color: HexColor("#5ebf00"),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "Secondary",
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22),
-                      ),
-                    ),
-                  ),
-*/
 
                   LongBtn(
                     btnColor: AppColors.mainGreen,
@@ -198,18 +125,24 @@ class _LoginState extends State<Login> {
                             fontSize: 18),
                       ),
                       Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
-                          child: GestureDetector(
-                            child: const Text(
-                              "Register",
-                              style: TextStyle(
-                                  color: AppColors.mainGreen,
-                                  fontFamily: "Secondary",
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                            ),
-                          ))
+                        padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        const Register()));
+                          },
+                          child: const Text(
+                            "Register",
+                            style: TextStyle(
+                                color: AppColors.mainGreen,
+                                fontFamily: "Secondary",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
+                          ),
+                        ),
+                      )
                     ],
                   )
                 ],

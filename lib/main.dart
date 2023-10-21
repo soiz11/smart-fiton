@@ -12,8 +12,10 @@ import 'package:smart_fit_on/services/auth.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:smart_fit_on/views/authentication/login.dart';
+//import 'package:smart_fit_on/views/authentication/login.dart';
 import 'package:smart_fit_on/views/authentication/register.dart';
 import 'firebase_options.dart';
+import 'package:smart_fit_on/assets/colors/colors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +38,10 @@ class MyApp extends StatelessWidget {
       value: AuthServices().user,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Login(),
+        home: Scaffold(
+          //backgroundColor: AppColors.bodyGrey,
+          body: Login(),
+        ),
       ),
     );
 

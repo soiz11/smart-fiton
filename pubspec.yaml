@@ -101,6 +101,11 @@ flutter:
       fonts:
         - asset: lib/assets/fonts/Abel-Regular.ttf   
 
+    - family: terinary
+      fonts:
+        - asset: lib/assets/fonts/Saira-Regular.ttf 
+  
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
 

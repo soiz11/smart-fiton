@@ -31,6 +31,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.borderGreen, width: 1.5)),
         hintText: widget.hintText,
+        hintStyle: const TextStyle(fontSize: 18),
         filled: true,
         fillColor: AppColors.fieldWhite,
       ),
