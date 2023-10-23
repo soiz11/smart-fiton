@@ -97,18 +97,16 @@ class _LoginState extends State<Login> {
                             });
                           },
                         ),
+                        const SizedBox(height: 20),
+                        LongBtn(
+                          btnColor: AppColors.mainGreen,
+                          btnText: "LOGIN",
+                          btnTextColor: Colors.white,
+                          isBorderRequired: false,
+                          onTap: () {},
+                        ),
                       ],
                     ),
-                  ),
-
-                  const SizedBox(height: 20),
-
-                  LongBtn(
-                    btnColor: AppColors.mainGreen,
-                    btnText: "LOGIN",
-                    btnTextColor: Colors.white,
-                    isBorderRequired: false,
-                    onTap: () {},
                   ),
 
                   const SizedBox(height: 15),

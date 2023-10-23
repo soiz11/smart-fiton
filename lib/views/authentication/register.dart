@@ -12,6 +12,9 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  bool isSeller = false;
+  bool isBuyer = false;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -85,10 +88,15 @@ class _RegisterState extends State<Register> {
                           btnTextColor: Colors.white,
                           isBorderRequired: false,
                           onTap: () {
+                            setState(() {
+                              isBuyer = !isBuyer;
+                            });
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        const OnBoarding()));
+                                        OnBoarding(
+                                            isSeller: isSeller,
+                                            isBuyer: isBuyer)));
                           },
                         ),
                       ),
@@ -102,10 +110,16 @@ class _RegisterState extends State<Register> {
                           btnTextColor: Colors.black,
                           isBorderRequired: true,
                           onTap: () {
+                            setState(() {
+                              isSeller = !isSeller;
+                            });
+
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        const OnBoarding()));
+                                        OnBoarding(
+                                            isSeller: isSeller,
+                                            isBuyer: isBuyer)));
                           },
                         ),
                       ),
