@@ -34,6 +34,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
         hintStyle: const TextStyle(fontSize: 18),
         filled: true,
         fillColor: AppColors.fieldWhite,
+        errorBorder: InputBorder.none,
+        focusedErrorBorder: InputBorder.none,
       ),
       validator: widget.validator,
       onChanged: widget.onChanged,
