@@ -7,12 +7,20 @@ import 'package:smart_fit_on/views/components/reg_headline.dart';
 import 'package:smart_fit_on/views/components/custom_text_feild.dart';
 import 'dart:developer' as dev;
 import 'package:smart_fit_on/views/components/long_btn.dart';
+import 'package:smart_fit_on/controllers/form_validators.dart';
 
 // ignore: must_be_immutable
 class OnBoarding extends StatefulWidget {
   bool isSeller;
   bool isBuyer;
-  OnBoarding({super.key, required this.isSeller, required this.isBuyer});
+  String? passwordValue;
+  String? confirmPasswordValue;
+  OnBoarding(
+      {super.key,
+      required this.isSeller,
+      required this.isBuyer,
+      this.passwordValue,
+      this.confirmPasswordValue});
 
   @override
   State<OnBoarding> createState() => _OnBoardingState();
@@ -22,8 +30,10 @@ String userNameBusinessEmailValue = '';
 String mobileNoValue = '';
 String passwordValue = '';
 String confirmPasswordValue = '';
+String originalPassword = "";
 
 final _formKey = GlobalKey<FormState>();
+final _formValidators = FormValidators();
 
 class _OnBoardingState extends State<OnBoarding> {
   @override
@@ -67,11 +77,7 @@ class _OnBoardingState extends State<OnBoarding> {
 
                           CustomTextField(
                             hintText: 'Username / Business Email',
-                            validator: (val) {
-                              return val!.length < 7
-                                  ? "Enter a password with at least 6 characters"
-                                  : null;
-                            },
+                            validator: _formValidators.validateEmail,
                             onChanged: (value) {
                               setState(
                                 () {
@@ -87,11 +93,7 @@ class _OnBoardingState extends State<OnBoarding> {
 
                           CustomTextField(
                             hintText: 'Mobile No',
-                            validator: (val) {
-                              return val!.length < 7
-                                  ? "Enter a password with at least 6 characters"
-                                  : null;
-                            },
+                            validator: _formValidators.validateMobile,
                             onChanged: (value) {
                               setState(
                                 () {
@@ -107,15 +109,11 @@ class _OnBoardingState extends State<OnBoarding> {
 
                           CustomTextField(
                             hintText: 'Password',
-                            validator: (val) {
-                              return val!.length < 7
-                                  ? "Enter a password with at least 6 characters"
-                                  : null;
-                            },
-                            onChanged: (value) {
+                            validator: _formValidators.validatePassword,
+                            onChanged: (password) {
                               setState(
                                 () {
-                                  passwordValue = value;
+                                  passwordValue = password;
                                   dev.log(
                                       'Password Field Value: $passwordValue');
                                 },
@@ -127,10 +125,9 @@ class _OnBoardingState extends State<OnBoarding> {
 
                           CustomTextField(
                             hintText: 'Confirm Password',
-                            validator: (val) {
-                              return val!.length < 7
-                                  ? "Enter a password with at least 6 characters"
-                                  : null;
+                            validator: (confirmPasswordValue) {
+                              return _formValidators.validatePasswordConfirm(
+                                  passwordValue, confirmPasswordValue);
                             },
                             onChanged: (value) {
                               setState(
@@ -154,6 +151,37 @@ class _OnBoardingState extends State<OnBoarding> {
                               isIcon: true,
                               icon: Icons.play_arrow_rounded,
                               onTap: () {
+                                if (_formKey.currentState!.validate()) {
+                                  // Perform the Firebase database update here
+                                  print('Submitting to Firebase database');
+                                  if (widget.isSeller) {
+                                    // Navigate to the Seller page
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            const AsSeller(),
+                                      ),
+                                    );
+
+                                    setState(() {
+                                      widget.isSeller = false;
+                                    });
+                                  } else if (widget.isBuyer) {
+                                    // Navigate to the Buyer page
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            const AsBuyer(),
+                                      ),
+                                    );
+
+                                    setState(() {
+                                      widget.isBuyer = false;
+                                    });
+                                  }
+                                }
+
+                                /*
                                 if (widget.isSeller) {
                                   // Navigate to the Seller page
                                   Navigator.of(context).pushReplacement(
@@ -178,7 +206,7 @@ class _OnBoardingState extends State<OnBoarding> {
                                   setState(() {
                                     widget.isBuyer = false;
                                   });
-                                }
+                                }*/
                               },
                             ),
                           ),

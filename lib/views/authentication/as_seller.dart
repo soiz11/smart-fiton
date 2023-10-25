@@ -79,11 +79,7 @@ class _AsSellerState extends State<AsSeller> {
 
                               CustomTextField(
                                 hintText: 'Full Name',
-                                validator: (val) {
-                                  return val!.length < 7
-                                      ? "Enter a password with at least 6 characters"
-                                      : null;
-                                },
+                                validator: null,
                                 onChanged: (value) {
                                   setState(
                                     () {
@@ -99,11 +95,7 @@ class _AsSellerState extends State<AsSeller> {
 
                               CustomTextField(
                                 hintText: 'Business Name',
-                                validator: (val) {
-                                  return val!.length < 7
-                                      ? "Enter a password with at least 6 characters"
-                                      : null;
-                                },
+                                validator: null,
                                 onChanged: (value) {
                                   setState(
                                     () {
@@ -119,11 +111,7 @@ class _AsSellerState extends State<AsSeller> {
 
                               CustomTextField(
                                 hintText: 'NIC No',
-                                validator: (val) {
-                                  return val!.length < 7
-                                      ? "Enter a password with at least 6 characters"
-                                      : null;
-                                },
+                                validator: null,
                                 onChanged: (value) {
                                   setState(
                                     () {
@@ -141,11 +129,7 @@ class _AsSellerState extends State<AsSeller> {
 
                               CustomTextField(
                                 hintText: 'Address Line 1',
-                                validator: (val) {
-                                  return val!.length < 7
-                                      ? "Enter a password with at least 6 characters"
-                                      : null;
-                                },
+                                validator: null,
                                 onChanged: (value) {
                                   setState(
                                     () {
@@ -161,11 +145,7 @@ class _AsSellerState extends State<AsSeller> {
 
                               CustomTextField(
                                 hintText: 'Address Line 2',
-                                validator: (val) {
-                                  return val!.length < 7
-                                      ? "Enter a password with at least 6 characters"
-                                      : null;
-                                },
+                                validator: null,
                                 onChanged: (value) {
                                   setState(
                                     () {
@@ -181,11 +161,7 @@ class _AsSellerState extends State<AsSeller> {
 
                               CustomTextField(
                                 hintText: 'Address Line 3',
-                                validator: (val) {
-                                  return val!.length < 7
-                                      ? "Enter a password with at least 6 characters"
-                                      : null;
-                                },
+                                validator: null,
                                 onChanged: (value) {
                                   setState(
                                     () {
