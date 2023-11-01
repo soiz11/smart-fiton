@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:smart_fit_on/assets/colors/colors.dart';
 import 'package:smart_fit_on/views/authentication/as_buyer.dart';
@@ -8,6 +10,8 @@ import 'package:smart_fit_on/views/components/custom_text_feild.dart';
 import 'dart:developer' as dev;
 import 'package:smart_fit_on/views/components/long_btn.dart';
 import 'package:smart_fit_on/controllers/form_validators.dart';
+import 'package:smart_fit_on/controllers/firebase_services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 // ignore: must_be_immutable
 class OnBoarding extends StatefulWidget {
@@ -34,6 +38,9 @@ String originalPassword = "";
 
 final _formKey = GlobalKey<FormState>();
 final _formValidators = FormValidators();
+final FirebaseServices _firebaseServices = FirebaseServices();
+
+String errorMessage = "";
 
 class _OnBoardingState extends State<OnBoarding> {
   @override
@@ -89,6 +96,17 @@ class _OnBoardingState extends State<OnBoarding> {
                             },
                           ),
 
+                          if (errorMessage.isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                errorMessage,
+                                style: const TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
                           const SizedBox(height: 10),
 
                           CustomTextField(
@@ -144,43 +162,51 @@ class _OnBoardingState extends State<OnBoarding> {
 
                           GestureDetector(
                             child: LongBtn(
-                              btnColor: AppColors.mainGreen,
-                              btnText: "NEXT",
-                              btnTextColor: Colors.white,
-                              isBorderRequired: false,
-                              isIcon: true,
-                              icon: Icons.play_arrow_rounded,
-                              onTap: () {
-                                if (_formKey.currentState!.validate()) {
-                                  // Perform the Firebase database update here
-                                  print('Submitting to Firebase database');
-                                  if (widget.isSeller) {
-                                    // Navigate to the Seller page
-                                    Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            const AsSeller(),
-                                      ),
-                                    );
+                                btnColor: AppColors.mainGreen,
+                                btnText: "NEXT",
+                                btnTextColor: Colors.white,
+                                isBorderRequired: false,
+                                isIcon: true,
+                                icon: Icons.play_arrow_rounded,
+                                onTap: () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    try {
+                                      var result =
+                                          await _firebaseServices.createUser(
+                                              userNameBusinessEmailValue,
+                                              confirmPasswordValue);
+                                      setState(() {});
 
-                                    setState(() {
-                                      widget.isSeller = false;
-                                    });
-                                  } else if (widget.isBuyer) {
-                                    // Navigate to the Buyer page
-                                    Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            const AsBuyer(),
-                                      ),
-                                    );
+                                      if (result != null) {
+                                        print('User created successfully!');
+                                        // Perform the Firebase database update here
+                                        print(
+                                            'Submitting to Firebase database');
+                                        if (widget.isSeller) {
+                                          // Navigate to the Seller page
+                                          Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  const AsSeller(),
+                                            ),
+                                          );
+                                        } else if (widget.isBuyer) {
+                                          // Navigate to the Buyer page
+                                          Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  const AsBuyer(),
+                                            ),
+                                          );
+                                        }
+                                      }
+                                    } on FirebaseAuthException catch (e) {
+                                      print(e.code);
 
-                                    setState(() {
-                                      widget.isBuyer = false;
-                                    });
+                                      // Set the error message as the validation error
+                                    }
                                   }
                                 }
-
                                 /*
                                 if (widget.isSeller) {
                                   // Navigate to the Seller page
@@ -207,13 +233,12 @@ class _OnBoardingState extends State<OnBoarding> {
                                     widget.isBuyer = false;
                                   });
                                 }*/
-                              },
-                            ),
+                                ),
                           ),
-                          // Add other widgets here
                         ],
                       ),
                     ),
+                    // Add other widgets here
                   ],
                 ),
               ),
