@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:smart_fit_on/assets/colors/colors.dart';
 import 'package:smart_fit_on/views/authentication/as_buyer.dart';
@@ -170,40 +168,37 @@ class _OnBoardingState extends State<OnBoarding> {
                                 icon: Icons.play_arrow_rounded,
                                 onTap: () async {
                                   if (_formKey.currentState!.validate()) {
-                                    try {
-                                      var result =
-                                          await _firebaseServices.createUser(
-                                              userNameBusinessEmailValue,
-                                              confirmPasswordValue);
-                                      setState(() {});
+                                    var result =
+                                        await _firebaseServices.createUser(
+                                            userNameBusinessEmailValue,
+                                            confirmPasswordValue,
+                                            context);
 
-                                      if (result != null) {
-                                        print('User created successfully!');
-                                        // Perform the Firebase database update here
-                                        print(
-                                            'Submitting to Firebase database');
-                                        if (widget.isSeller) {
-                                          // Navigate to the Seller page
-                                          Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(
-                                              builder: (BuildContext context) =>
-                                                  const AsSeller(),
-                                            ),
-                                          );
-                                        } else if (widget.isBuyer) {
-                                          // Navigate to the Buyer page
-                                          Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(
-                                              builder: (BuildContext context) =>
-                                                  const AsBuyer(),
-                                            ),
-                                          );
-                                        }
+                                    FocusScope.of(context).unfocus();
+
+                                    setState(() {});
+
+                                    if (result != null) {
+                                      print('User created successfully!');
+                                      // Perform the Firebase database update here
+                                      print('Submitting to Firebase database');
+                                      if (widget.isSeller) {
+                                        // Navigate to the Seller page
+                                        Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                const AsSeller(),
+                                          ),
+                                        );
+                                      } else if (widget.isBuyer) {
+                                        // Navigate to the Buyer page
+                                        Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                const AsBuyer(),
+                                          ),
+                                        );
                                       }
-                                    } on FirebaseAuthException catch (e) {
-                                      print(e.code);
-
-                                      // Set the error message as the validation error
                                     }
                                   }
                                 }
