@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_fit_on/cus_bottomnavbar.dart';
 import 'package:smart_fit_on/views/authentication/register.dart';
 
 import 'package:smart_fit_on/views/components/custom_text_feild.dart';
@@ -6,6 +7,8 @@ import 'package:smart_fit_on/views/components/custom_text_feild.dart';
 import 'dart:developer' as dev;
 import 'package:smart_fit_on/views/components/long_btn.dart';
 import 'package:smart_fit_on/assets/colors/colors.dart';
+import 'package:smart_fit_on/controllers/form_validators.dart';
+import 'package:smart_fit_on/controllers/firebase_services.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -15,6 +18,7 @@ class Login extends StatefulWidget {
 }
 
 final _formKey = GlobalKey<FormState>();
+final FirebaseServices _firebaseServices = FirebaseServices();
 
 String emailFieldValue = '';
 String passwordFieldValue = '';
@@ -68,11 +72,9 @@ class _LoginState extends State<Login> {
                         const SizedBox(height: 10),
                         CustomTextField(
                           hintText: 'Username',
-                          validator: (String? val) {
-                            return val?.isEmpty == true
-                                ? "Enter a valid email"
-                                : null;
-                          },
+                          validator: (String? value) =>
+                              FormValidators.validateLoginEmailAndPassword(
+                                  value, 'username or business email'),
                           onChanged: (value) {
                             setState(() {
                               emailFieldValue = value;
@@ -84,11 +86,9 @@ class _LoginState extends State<Login> {
                         const SizedBox(height: 10),
                         CustomTextField(
                           hintText: 'Password',
-                          validator: (val) {
-                            return val!.length < 7
-                                ? "Enter a password with at least 6 characters"
-                                : null;
-                          },
+                          validator: (String? value) =>
+                              FormValidators.validateLoginEmailAndPassword(
+                                  value, 'password'),
                           onChanged: (value) {
                             setState(() {
                               passwordFieldValue = value;
@@ -99,12 +99,21 @@ class _LoginState extends State<Login> {
                         ),
                         const SizedBox(height: 20),
                         LongBtn(
-                          btnColor: AppColors.mainGreen,
-                          btnText: "LOGIN",
-                          btnTextColor: Colors.white,
-                          isBorderRequired: false,
-                          onTap: () {},
-                        ),
+                            btnColor: AppColors.mainGreen,
+                            btnText: "LOGIN",
+                            btnTextColor: Colors.white,
+                            isBorderRequired: false,
+                            onTap: () async {
+                              if (_formKey.currentState!.validate()) {
+                                await _firebaseServices.logIn(emailFieldValue,
+                                    passwordFieldValue, context);
+
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            const CusBottomNavBar()));
+                              }
+                            }),
                       ],
                     ),
                   ),

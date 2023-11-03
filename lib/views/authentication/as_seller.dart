@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_fit_on/views/authentication/login.dart';
 import 'package:smart_fit_on/views/authentication/on_boarding.dart';
 //import 'package:smart_fit_on/views/authentication/register.dart';
 import 'package:smart_fit_on/views/components/reg_headline.dart';
@@ -7,9 +8,17 @@ import 'package:smart_fit_on/views/components/custom_text_feild.dart';
 import 'dart:developer' as dev;
 import 'package:smart_fit_on/views/components/long_btn.dart';
 import 'package:smart_fit_on/assets/colors/colors.dart';
+import 'package:smart_fit_on/controllers/firebase_services.dart';
+import 'package:smart_fit_on/controllers/form_validators.dart';
 
 class AsSeller extends StatefulWidget {
-  const AsSeller({super.key});
+  const AsSeller(
+      {super.key,
+      required this.userNameBusinessEmailValue,
+      required this.mobileNoValue});
+
+  final String userNameBusinessEmailValue;
+  final String mobileNoValue;
 
   @override
   State<AsSeller> createState() => _AsSellerState();
@@ -21,8 +30,11 @@ String nicNoValue = "";
 String addressLine1Value = "";
 String addressLine2Value = "";
 String addressLine3Value = "";
+String customerType = "Seller";
 
 final _formKey = GlobalKey<FormState>();
+final _formValidators = FormValidators();
+final FirebaseServices _firebaseServices = FirebaseServices();
 
 class _AsSellerState extends State<AsSeller> {
   @override
@@ -79,7 +91,7 @@ class _AsSellerState extends State<AsSeller> {
 
                               CustomTextField(
                                 hintText: 'Full Name',
-                                validator: null,
+                                validator: _formValidators.validateFullName,
                                 onChanged: (value) {
                                   setState(
                                     () {
@@ -95,7 +107,7 @@ class _AsSellerState extends State<AsSeller> {
 
                               CustomTextField(
                                 hintText: 'Business Name',
-                                validator: null,
+                                validator: _formValidators.validateBusinessName,
                                 onChanged: (value) {
                                   setState(
                                     () {
@@ -111,7 +123,7 @@ class _AsSellerState extends State<AsSeller> {
 
                               CustomTextField(
                                 hintText: 'NIC No',
-                                validator: null,
+                                validator: _formValidators.validateNIC,
                                 onChanged: (value) {
                                   setState(
                                     () {
@@ -129,7 +141,7 @@ class _AsSellerState extends State<AsSeller> {
 
                               CustomTextField(
                                 hintText: 'Address Line 1',
-                                validator: null,
+                                validator: _formValidators.validateAddress,
                                 onChanged: (value) {
                                   setState(
                                     () {
@@ -145,7 +157,8 @@ class _AsSellerState extends State<AsSeller> {
 
                               CustomTextField(
                                 hintText: 'Address Line 2',
-                                validator: null,
+                                validator:
+                                    _formValidators.validateOptionalAddressLine,
                                 onChanged: (value) {
                                   setState(
                                     () {
@@ -161,7 +174,8 @@ class _AsSellerState extends State<AsSeller> {
 
                               CustomTextField(
                                 hintText: 'Address Line 3',
-                                validator: null,
+                                validator:
+                                    _formValidators.validateOptionalAddressLine,
                                 onChanged: (value) {
                                   setState(
                                     () {
@@ -181,8 +195,32 @@ class _AsSellerState extends State<AsSeller> {
                                   btnText: "SUBMIT",
                                   btnTextColor: Colors.white,
                                   isBorderRequired: false,
-                                  onTap: () {
-                                    // Add your logic here
+                                  onTap: () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      _formKey.currentState!.save();
+                                      await _firebaseServices
+                                          .sellerBasicDataSaving(
+                                              userNameBusinessEmailValue,
+                                              mobileNoValue,
+                                              fullNameValue,
+                                              businessNameValue,
+                                              nicNoValue,
+                                              addressLine1Value,
+                                              addressLine2Value,
+                                              addressLine3Value,
+                                              customerType,
+                                              context);
+
+                                      FocusScope.of(context).unfocus();
+
+                                      setState(() {});
+                                      // Add your logic here
+                                      Navigator.of(context)
+                                          .pushReplacement(MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            const Login(),
+                                      ));
+                                    }
                                   },
                                 ),
                               ),

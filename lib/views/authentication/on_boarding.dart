@@ -187,15 +187,24 @@ class _OnBoardingState extends State<OnBoarding> {
                                         Navigator.of(context).pushReplacement(
                                           MaterialPageRoute(
                                             builder: (BuildContext context) =>
-                                                const AsSeller(),
+                                                AsSeller(
+                                                    userNameBusinessEmailValue:
+                                                        userNameBusinessEmailValue,
+                                                    mobileNoValue:
+                                                        mobileNoValue // Pass the variable directly
+                                                    ),
                                           ),
                                         );
                                       } else if (widget.isBuyer) {
                                         // Navigate to the Buyer page
                                         Navigator.of(context).pushReplacement(
                                           MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                const AsBuyer(),
+                                            builder: (BuildContext context) => AsBuyer(
+                                                userNameBusinessEmailValue:
+                                                    userNameBusinessEmailValue,
+                                                mobileNoValue:
+                                                    mobileNoValue // Pass the variable directly
+                                                ),
                                           ),
                                         );
                                       }

@@ -8,7 +8,13 @@ import 'package:smart_fit_on/views/components/long_btn.dart';
 import 'package:smart_fit_on/controllers/form_validators.dart';
 
 class AsBuyer extends StatefulWidget {
-  const AsBuyer({super.key});
+  const AsBuyer(
+      {super.key,
+      required this.mobileNoValue,
+      required this.userNameBusinessEmailValue});
+
+  final String userNameBusinessEmailValue;
+  final String mobileNoValue;
 
   @override
   State<AsBuyer> createState() => _AsBuyerState();
@@ -20,6 +26,7 @@ String nicNoValue = "";
 String addressLine1Value = "";
 String addressLine2Value = "";
 String addressLine3Value = "";
+String customerType = "Buyer";
 
 final _formKey = GlobalKey<FormState>();
 final _formValidators = FormValidators();

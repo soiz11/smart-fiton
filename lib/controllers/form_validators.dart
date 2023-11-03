@@ -3,7 +3,7 @@ import 'package:smart_fit_on/views/authentication/on_boarding.dart';
 
 class FormValidators {
   static String? validateName(String? value, String any) {
-    //validate name
+    //validate name (First name/last name)
     if (value == null || value.isEmpty) {
       return 'Please enter your $any name';
     }
@@ -16,14 +16,43 @@ class FormValidators {
     return null;
   }
 
+  //validate full name
+  String? validateFullName(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your full name';
+    }
+    List<String> parts = value.split(' ');
+    if (parts.length < 2) {
+      return 'Full name must have at least two parts';
+    }
+    if (value.length < 3) {
+      return 'Full name must be at least 3 characters';
+    }
+    if (!RegExp(r"^[a-zA-Z ]+$").hasMatch(value)) {
+      return 'Please enter only alphabetical characters';
+    }
+    return null;
+  }
+
+  //validate business name
+  String? validateBusinessName(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your business name';
+    }
+
+    if (!RegExp(r'^[a-zA-Z0-9 ]+$').hasMatch(value)) {
+      return 'Please enter only alphanumeric characters';
+    }
+    return null;
+  }
+
   //nic validation
   String? validateNIC(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your NIC';
     }
 
-    String pattern =
-        r'^[0-9]{9}[vVxX]$'; // Adjust the regular expression pattern based on your country's NIC format
+    String pattern = r'^(\d{9}[vV]|\d{12})$';
     RegExp regex = RegExp(pattern);
     if (!regex.hasMatch(value)) {
       return 'Please enter a valid NIC';
@@ -126,6 +155,16 @@ class FormValidators {
     if (password != confirmPassword) {
       return 'Passwords do not match';
     }
+    return null;
+  }
+
+  //validating login email and password
+  static String? validateLoginEmailAndPassword(String? value, String any) {
+    //validate name (First name/last name)
+    if (value == null || value.isEmpty) {
+      return 'Please enter your $any';
+    }
+
     return null;
   }
 }
