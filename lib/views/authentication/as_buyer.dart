@@ -6,6 +6,8 @@ import 'package:smart_fit_on/assets/colors/colors.dart';
 import 'dart:developer' as dev;
 import 'package:smart_fit_on/views/components/long_btn.dart';
 import 'package:smart_fit_on/controllers/form_validators.dart';
+import 'package:smart_fit_on/controllers/firebase_services.dart';
+import 'package:smart_fit_on/views/authentication/login.dart';
 
 class AsBuyer extends StatefulWidget {
   const AsBuyer(
@@ -30,6 +32,7 @@ String customerType = "Buyer";
 
 final _formKey = GlobalKey<FormState>();
 final _formValidators = FormValidators();
+final FirebaseServices _firebaseServices = FirebaseServices();
 
 class _AsBuyerState extends State<AsBuyer> {
   @override
@@ -192,13 +195,31 @@ class _AsBuyerState extends State<AsBuyer> {
                                     btnText: "SUBMIT",
                                     btnTextColor: Colors.white,
                                     isBorderRequired: false,
-                                    onTap: () {
-                                      //
+                                    onTap: () async {
                                       if (_formKey.currentState!.validate()) {
                                         _formKey.currentState!.save();
-                                        // Use the _firstName variable for further processing
+                                        await _firebaseServices
+                                            .buyerBasicDataSaving(
+                                                userNameBusinessEmailValue,
+                                                mobileNoValue,
+                                                firstNameValue,
+                                                lastNameValue,
+                                                nicNoValue,
+                                                addressLine1Value,
+                                                addressLine2Value,
+                                                addressLine3Value,
+                                                customerType,
+                                                context);
 
-                                        dev.log('fname: $firstNameValue');
+                                        FocusScope.of(context).unfocus();
+
+                                        setState(() {});
+                                        // Add your logic here
+                                        Navigator.of(context)
+                                            .pushReplacement(MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              const Login(),
+                                        ));
                                       }
                                     }),
                               ),

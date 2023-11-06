@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_fit_on/cus_bottomnavbar.dart';
 import 'package:smart_fit_on/views/authentication/register.dart';
+import 'package:smart_fit_on/views/sel_screens/seller_dashboard.dart';
 
 import 'package:smart_fit_on/views/components/custom_text_feild.dart';
 
@@ -9,6 +10,7 @@ import 'package:smart_fit_on/views/components/long_btn.dart';
 import 'package:smart_fit_on/assets/colors/colors.dart';
 import 'package:smart_fit_on/controllers/form_validators.dart';
 import 'package:smart_fit_on/controllers/firebase_services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -105,13 +107,31 @@ class _LoginState extends State<Login> {
                             isBorderRequired: false,
                             onTap: () async {
                               if (_formKey.currentState!.validate()) {
-                                await _firebaseServices.logIn(emailFieldValue,
-                                    passwordFieldValue, context);
-
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
+                                User? user = await _firebaseServices.logIn(
+                                    emailFieldValue,
+                                    passwordFieldValue,
+                                    context);
+                                FocusScope.of(context).unfocus();
+                                if (user != null) {
+                                  String userType =
+                                      await FirebaseServices.getCustomerType(
+                                          emailFieldValue);
+                                  if (userType == 'Seller') {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
                                         builder: (BuildContext context) =>
-                                            const CusBottomNavBar()));
+                                            SellerDashboard(),
+                                      ),
+                                    );
+                                  } else if (userType == 'Buyer') {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            CusBottomNavBar(),
+                                      ),
+                                    );
+                                  }
+                                }
                               }
                             }),
                       ],

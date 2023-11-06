@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
+import 'package:smart_fit_on/views/authentication/as_buyer.dart';
 //import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_fit_on/views/components/custom_toast.dart';
 //import 'package:firebase_core/firebase_core.dart';
@@ -62,6 +63,42 @@ class FirebaseServices {
     }
   }
 
+  //Buyer Basic data saving to firestore
+
+  Future buyerBasicDataSaving(
+    String userNameBusinessEmailValue,
+    String mobileNoValue,
+    String fisrtNameValue,
+    String lastNameValue,
+    String nicNoValue,
+    String addressLine1Value,
+    String addressLine2Value,
+    String addressLine3Value,
+    String customerType,
+    BuildContext context,
+  ) async {
+    CollectionReference buyerBasicRef =
+        FirebaseFirestore.instance.collection("BuyerBasicData");
+    try {
+      await buyerBasicRef.add({
+        'username': userNameBusinessEmailValue,
+        'firstName': firstNameValue,
+        'lastName': lastNameValue,
+        'userType': customerType,
+        'mobile': mobileNoValue,
+        'nic': nicNoValue,
+        'addressLine1': addressLine1Value,
+        'addressLine2': addressLine2Value,
+        'addressLine3': addressLine3Value,
+      });
+      print('Data written to Firestore database successfully.');
+    } on FirebaseAuthException catch (e) {
+      pikdyToasts.customErrorToast(e.message!, context);
+      print(e.message!);
+      //Fluttertoast.showToast(msg: e.message!, gravity: ToastGravity.TOP);
+    }
+  }
+
   //login function
   Future<User?> logIn(String emailFieldValue, String passwordFieldValue,
       BuildContext context) async {
@@ -77,5 +114,21 @@ class FirebaseServices {
       //Fluttertoast.showToast(msg: e.message!, gravity: ToastGravity.TOP);
     }
     return null;
+  }
+
+  //getCustomerType method
+  static Future<String> getCustomerType(String email) async {
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection("SellerBasicData")
+        .where("username", isEqualTo: email)
+        .get();
+    print("username: $email");
+    if (snapshot.docs.isNotEmpty) {
+      print("Seller");
+      return "Seller";
+    } else {
+      print("Buyer");
+      return "Buyer";
+    }
   }
 }
