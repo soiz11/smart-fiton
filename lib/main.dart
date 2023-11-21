@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_fit_on/cus_bottomnavbar.dart';
 import 'package:smart_fit_on/models/UserModel.dart';
 import 'package:smart_fit_on/services/auth.dart';
 //import 'package:smart_fit_on/views/authentication/login.dart';
@@ -41,7 +42,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           //backgroundColor: AppColors.bodyGrey,
-          body: Login(),
+          body: CusBottomNavBar(),
+          //Login(),
         ),
       ),
     );
@@ -51,7 +53,7 @@ class MyApp extends StatelessWidget {
 
       home: Wrapper(),
       //home: Wrapper(),
-      //CusBottomNavBar(),
+      CusBottomNavBar(),
     ); */
   }
 }
