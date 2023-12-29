@@ -3,9 +3,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:smart_fit_on/assets/colors/colors.dart';
 import 'package:smart_fit_on/views/cus_screens/cus_cart.dart';
 import 'package:smart_fit_on/views/cus_screens/cus_favorite.dart';
 import 'package:smart_fit_on/views/cus_screens/cus_home.dart';
+import 'package:smart_fit_on/controllers/form_validators.dart';
 
 //Color softGreen = HexColor("#379300");
 
@@ -31,7 +33,7 @@ class _CusBottomNavBarState extends State<CusBottomNavBar> {
         index: index,
         backgroundColor: Colors.transparent,
         buttonBackgroundColor: Colors.black,
-        color: HexColor("#379300"),
+        color: HexColor("#5DBF00"),
         items: const [
           Icon(Icons.favorite, color: Colors.white),
           Icon(Icons.home, color: Colors.white),

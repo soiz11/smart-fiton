@@ -1,0 +1,113 @@
+import 'package:flutter/material.dart';
+import 'package:smart_fit_on/assets/colors/colors.dart';
+
+class SingleTile extends StatelessWidget {
+  const SingleTile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 5),
+      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+      height: 180,
+      decoration: BoxDecoration(
+        color: AppColors.bodyGrey,
+        border: Border.all(color: Colors.white, width: 3),
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 1,
+            blurRadius: 2,
+            offset: const Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            flex: 5,
+            child: Container(
+              decoration: const BoxDecoration(
+                  // Your outer container decoration goes here
+                  ),
+              padding: EdgeInsets.symmetric(vertical: 3.0),
+              child: Align(
+                alignment: Alignment.center,
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 7,
+                      child: Align(
+                        alignment: const Alignment(1.3, 0),
+                        child: Image.asset(
+                          "lib/assets/images/shirt.png",
+                          fit: BoxFit.fitHeight,
+                          height: 100,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Align(
+                        alignment: const Alignment(-2.0, -0.9),
+                        child: Container(
+                          width: 30,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: AppColors.mainGreen,
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 2.0,
+                            ),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              '\$7',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontFamily: "main",
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 15.0),
+              child: Align(
+                alignment: Alignment.center,
+                child: Text(
+                  'Product 1 is simply ',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 12,
+                    fontFamily: "terinary",
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
