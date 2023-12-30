@@ -2,7 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:smart_fit_on/assets/colors/colors.dart';
 
 class SingleTile extends StatelessWidget {
-  const SingleTile({super.key});
+  final String name;
+  final String description;
+  final int price;
+  final String imageUrl;
+
+  const SingleTile({
+    required this.name,
+    required this.description,
+    required this.price,
+    required this.imageUrl,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +42,7 @@ class SingleTile extends StatelessWidget {
               decoration: const BoxDecoration(
                   // Your outer container decoration goes here
                   ),
-              padding: EdgeInsets.symmetric(vertical: 3.0),
+              padding: const EdgeInsets.symmetric(vertical: 3.0),
               child: Align(
                 alignment: Alignment.center,
                 child: Row(
@@ -62,10 +73,10 @@ class SingleTile extends StatelessWidget {
                               width: 2.0,
                             ),
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Text(
-                              '\$7',
-                              style: TextStyle(
+                              '\$$price',
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontFamily: "main",
@@ -91,12 +102,12 @@ class SingleTile extends StatelessWidget {
                   bottomRight: Radius.circular(10),
                 ),
               ),
-              padding: EdgeInsets.symmetric(horizontal: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
-                  'Product 1 is simply ',
-                  style: TextStyle(
+                  name,
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 12,
                     fontFamily: "terinary",

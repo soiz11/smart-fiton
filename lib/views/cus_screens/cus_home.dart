@@ -4,61 +4,37 @@ import 'package:smart_fit_on/views/components/custom_text_feild.dart';
 import 'package:smart_fit_on/views/components/banner.dart';
 import 'package:smart_fit_on/views/components/single_tile.dart';
 import 'package:smart_fit_on/views/components/single_tile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CusHome extends StatefulWidget {
-  const CusHome({super.key});
+  const CusHome({Key? key}) : super(key: key);
 
   @override
   State<CusHome> createState() => _CusHomeState();
 }
 
-String search = '';
-
 class _CusHomeState extends State<CusHome> {
+  late Future<QuerySnapshot> _future;
+
+  @override
+  void initState() {
+    super.initState();
+    _future = FirebaseFirestore.instance.collection('productData').get();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bodyGrey,
       appBar: AppBar(
         backgroundColor: AppColors.mainGreen,
-        elevation: 0, // remove the shadow
+        elevation: 0,
         actions: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: Row(
               children: [
-                // TextField(
-                //   style: TextStyle(color: Colors.white),
-                //   decoration: InputDecoration(
-                //     filled: true,
-                //     fillColor: Color(0xffa8cf83),
-                //     border: OutlineInputBorder(
-                //       borderRadius: BorderRadius.circular(8.0),
-                //       borderSide: BorderSide.none,
-                //     ),
-                //     hintText: "Search",
-                //     suffixIcon: Icon(Icons.search, color: AppColors.mainGreen),
-                //   ),
-                // ),
-                const SizedBox(width: 8.0),
-                GestureDetector(
-                  onTap: () {
-                    // Handle click on the avatar
-                    print('Avatar clicked');
-                  },
-                  child: ClipOval(
-                    child: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      radius: 20,
-                      child: Image.asset(
-                        'lib/assets/images/girl.png',
-                        // Replace with the correct image asset path
-                        width: 44, // Adjust the width as needed
-                        height: 44, // Adjust the height as needed
-                      ),
-                    ),
-                  ),
-                ),
+                // ... existing code
               ],
             ),
           ),
@@ -74,26 +50,54 @@ class _CusHomeState extends State<CusHome> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const CusBanner(),
-                GridView.count(
-                  crossAxisCount: 2,
-                  shrinkWrap: true, // Add shrinkWrap: true to GridView
-                  physics:
-                      const NeverScrollableScrollPhysics(), // Disable GridView scrolling
-                  children: const [
-                    // Your GridView items go here
-                    // For example, you can use SingleTile() widgets here
-                    SingleTile(),
-                    SingleTile(),
-                    SingleTile(),
-                    SingleTile(),
-                    SingleTile(),
+                FutureBuilder<QuerySnapshot>(
+                  future: _future,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Container(
+                        margin: const EdgeInsets.only(top: 100.0),
+                        child: const Center(
+                          child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  AppColors.mainGreen)),
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else {
+                      var products = snapshot.data!.docs;
 
-                    // Add more DualTile widgets as needed
-                  ],
+                      return ProductGridView(products: products);
+                    }
+                  },
                 ),
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class ProductGridView extends StatelessWidget {
+  final List<QueryDocumentSnapshot> products;
+
+  const ProductGridView({Key? key, required this.products}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.count(
+      crossAxisCount: 2,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      children: List.generate(
+        products.length,
+        (index) => SingleTile(
+          name: products[index]['name'] ?? '',
+          description: products[index]['description'] ?? '',
+          price: (products[index]['price'] as num?)?.toInt() ?? 0,
+          imageUrl: products[index]['imageUrl'] ?? '',
         ),
       ),
     );
