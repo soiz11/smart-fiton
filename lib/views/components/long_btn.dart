@@ -51,17 +51,22 @@ class LongBtn extends StatelessWidget {
                   Text(
                     btnText,
                     style: TextStyle(
-                        color: btnTextColor,
-                        fontFamily: "main",
-                        fontSize: 32,
-                        letterSpacing: 1.0),
+                      color: btnTextColor,
+                      fontFamily: "main",
+                      fontSize: 32,
+                      letterSpacing: 1.0,
+                    ),
                   ),
                   isIcon == false
                       ? const SizedBox.shrink()
-                      : Icon(
-                          icon,
-                          color: Colors.white,
-                          size: 40,
+                      : Padding(
+                          padding: const EdgeInsets.only(
+                              left: 15.0), // Adjust the left margin as needed
+                          child: Icon(
+                            icon,
+                            color: Colors.white,
+                            size: 40,
+                          ),
                         ),
                 ],
               ),
