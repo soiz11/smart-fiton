@@ -59,7 +59,7 @@ class _RegisterState extends State<Register> {
                         "Regsiter As",
                         style: TextStyle(
                           color: Colors.black,
-                          fontFamily: "terinary",
+                          fontFamily: "quad",
                           fontSize: 55,
                         ),
                       ),

@@ -8,6 +8,7 @@ import 'package:smart_fit_on/views/cus_screens/cus_cart.dart';
 import 'package:smart_fit_on/views/cus_screens/cus_favorite.dart';
 import 'package:smart_fit_on/views/cus_screens/cus_home.dart';
 import 'package:smart_fit_on/controllers/form_validators.dart';
+import 'package:smart_fit_on/views/cus_screens/still_dev.dart';
 
 //Color softGreen = HexColor("#379300");
 
@@ -24,7 +25,9 @@ class _CusBottomNavBarState extends State<CusBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     // ignore: non_constant_identifier_names
-    List CusScreens = [CusFavorite(), CusHome(), CusCart()];
+
+    //cusFavorite(), CusCart() in development so it repalace in StillDev()
+    List CusScreens = [StillDev(), CusHome(), StillDev()];
 
     return Scaffold(
       extendBody: true,

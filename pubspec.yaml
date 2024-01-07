@@ -105,5 +105,9 @@ flutter:
       fonts:
         - asset: lib/assets/fonts/Quicksand-Regular.ttf
 
+    - family: quad
+      fonts:
+        - asset: lib/assets/fonts/Saira-Regular.ttf
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

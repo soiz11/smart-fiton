@@ -42,8 +42,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           //backgroundColor: AppColors.bodyGrey,
-          body: CusBottomNavBar(),
-          //Login(),
+          body: Login(),
+          //Login(),CusBottomNavBar()
         ),
       ),
     );

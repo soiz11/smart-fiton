@@ -28,79 +28,77 @@ String passwordFieldValue = '';
 class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: AppColors.bodyGrey,
-        body: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 25.0,
-          ),
-          child: Center(
-            child: SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              child: Column(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  //logo
-
-                  const SizedBox(height: 0),
-
-                  Image.asset(
-                    "lib/assets/images/PIKDY.png",
-                    width: 200,
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  //welcome text
-                  const Text(
-                    "For an immersive shopping experience",
-                    style: TextStyle(
-                        color: AppColors.textGrey,
-                        fontFamily: "secondary",
-                        fontSize: 20),
-                  ),
-
-                  const SizedBox(height: 15),
-
-                  //Text feilds
-
-                  Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 10),
-                        CustomTextField(
-                          hintText: 'Username',
-                          validator: (String? value) =>
-                              FormValidators.validateLoginEmailAndPassword(
-                                  value, 'username or business email'),
-                          onChanged: (value) {
-                            setState(() {
-                              emailFieldValue = value;
-                              // ignore: avoid_print
-                              dev.log('Email Field Value: $emailFieldValue');
-                            });
-                          },
-                        ),
-                        const SizedBox(height: 10),
-                        CustomTextField(
-                          hintText: 'Password',
-                          validator: (String? value) =>
-                              FormValidators.validateLoginEmailAndPassword(
-                                  value, 'password'),
-                          onChanged: (value) {
-                            setState(() {
-                              passwordFieldValue = value;
-                              dev.log(
-                                  'Password Field Value: $passwordFieldValue');
-                            });
-                          },
-                        ),
-                        const SizedBox(height: 20),
-                        LongBtn(
+    return WillPopScope(
+      onWillPop: () async {
+        // Check if the user is signed in
+        User? currentUser = FirebaseAuth.instance.currentUser;
+        if (currentUser == null) {
+          // If the user is not signed in, navigate to the login page
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => Login()),
+          );
+          return false; // Prevent going back
+        }
+        return true; // Allow going back
+      },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          backgroundColor: AppColors.bodyGrey,
+          body: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 25.0,
+            ),
+            child: Center(
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 0),
+                    Image.asset(
+                      "lib/assets/images/PIKDY.png",
+                      width: 200,
+                    ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      "For an immersive shopping experience",
+                      style: TextStyle(
+                          color: AppColors.textGrey,
+                          fontFamily: "secondary",
+                          fontSize: 20),
+                    ),
+                    const SizedBox(height: 15),
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 10),
+                          CustomTextField(
+                            hintText: 'Username',
+                            validator: (String? value) =>
+                                FormValidators.validateLoginEmailAndPassword(
+                                    value, 'username or business email'),
+                            onChanged: (value) {
+                              setState(() {
+                                emailFieldValue = value;
+                              });
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          CustomTextField(
+                            hintText: 'Password',
+                            validator: (String? value) =>
+                                FormValidators.validateLoginEmailAndPassword(
+                                    value, 'password'),
+                            onChanged: (value) {
+                              setState(() {
+                                passwordFieldValue = value;
+                              });
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          LongBtn(
                             btnColor: AppColors.mainGreen,
                             btnText: "LOGIN",
                             btnTextColor: Colors.white,
@@ -108,14 +106,16 @@ class _LoginState extends State<Login> {
                             onTap: () async {
                               if (_formKey.currentState!.validate()) {
                                 User? user = await _firebaseServices.logIn(
-                                    emailFieldValue,
-                                    passwordFieldValue,
-                                    context);
+                                  emailFieldValue,
+                                  passwordFieldValue,
+                                  context,
+                                );
                                 FocusScope.of(context).unfocus();
                                 if (user != null) {
                                   String userType =
                                       await FirebaseServices.getCustomerType(
-                                          emailFieldValue);
+                                    emailFieldValue,
+                                  );
                                   if (userType == 'Seller') {
                                     Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
@@ -133,46 +133,46 @@ class _LoginState extends State<Login> {
                                   }
                                 }
                               }
-                            }),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 15),
-
-                  //toggle area
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Don't have an account?",
-                        style: TextStyle(
-                            color: Colors.grey[700],
-                            fontFamily: "Secondary",
-                            fontSize: 18),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        const Register()));
-                          },
-                          child: const Text(
-                            "Register",
-                            style: TextStyle(
-                                color: AppColors.mainGreen,
-                                fontFamily: "Secondary",
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
+                            },
                           ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Don't have an account?",
+                          style: TextStyle(
+                              color: Colors.grey[700],
+                              fontFamily: "Secondary",
+                              fontSize: 18),
                         ),
-                      )
-                    ],
-                  )
-                ],
+                        Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          const Register()));
+                            },
+                            child: const Text(
+                              "Register",
+                              style: TextStyle(
+                                  color: AppColors.mainGreen,
+                                  fontFamily: "Secondary",
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                            ),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),

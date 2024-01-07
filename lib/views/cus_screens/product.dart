@@ -4,6 +4,7 @@ import 'package:smart_fit_on/views/components/long_btn.dart';
 import 'package:smart_fit_on/views/components/other_heading.dart';
 import 'package:smart_fit_on/views/components/reg_headline.dart';
 import 'package:smart_fit_on/views/cus_screens/cus_home.dart';
+import 'package:smart_fit_on/views/cus_screens/still_dev.dart';
 
 class Product extends StatefulWidget {
   final String name;
@@ -11,7 +12,7 @@ class Product extends StatefulWidget {
   final int price;
   final String imageUrl;
 
-  const Product({
+  Product({
     required this.name,
     required this.description,
     required this.price,
@@ -149,7 +150,11 @@ class _ProductState extends State<Product> {
                               // Container with favourite button
                               GestureDetector(
                                 onTap: () {
-                                  // Handle the onTap event for the favourite button here
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => StillDev()),
+                                  );
                                 },
                                 child: Container(
                                   height: 60,
@@ -182,7 +187,11 @@ class _ProductState extends State<Product> {
                               // Container with cart button
                               GestureDetector(
                                 onTap: () {
-                                  // Handle the onTap event for the cart button here
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => StillDev()),
+                                  );
                                 },
                                 child: Container(
                                   height: 60,
@@ -255,7 +264,12 @@ class _ProductState extends State<Product> {
                         btnText: "TRY ON",
                         btnTextColor: Colors.white,
                         isBorderRequired: false,
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => StillDev()),
+                          );
+                        },
                         isIcon: true,
                         icon: Icons.camera_alt,
                       ),

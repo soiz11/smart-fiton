@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:smart_fit_on/views/authentication/as_buyer.dart';
+import 'package:smart_fit_on/views/authentication/login.dart';
 //import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_fit_on/views/components/custom_toast.dart';
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:smart_fit_on/views/cus_screens/still_dev.dart';
+import 'package:flutter/material.dart';
 
 class FirebaseServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -129,6 +132,22 @@ class FirebaseServices {
     } else {
       print("Buyer");
       return "Buyer";
+    }
+  }
+
+  //logout
+
+  Future<void> signOut(BuildContext context) async {
+    try {
+      await _auth.signOut();
+      await Future.delayed(
+          Duration.zero); // This line allows the async gap to be closed
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Login()),
+      );
+    } catch (e) {
+      print("Error signing out: $e");
     }
   }
 }
