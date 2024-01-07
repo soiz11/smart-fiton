@@ -9,8 +9,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class Profile extends StatefulWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final String addressLine1;
+  final String addressLine2;
+  final String addressLine3;
+  final String firstName;
+  final String lastName;
 
-  Profile({Key? key}) : super(key: key);
+  Profile({
+    required this.addressLine1,
+    required this.addressLine2,
+    required this.addressLine3,
+    required this.firstName,
+    required this.lastName,
+  });
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -119,7 +130,7 @@ class _ProfileState extends State<Profile> {
                                 height:
                                     0), // Adjust the spacing between Text widgets
                             Text(
-                              'Additional Text 1',
+                              widget.firstName,
                               style: TextStyle(
                                   fontFamily: "terinary",
                                   fontSize: 15,
@@ -188,7 +199,7 @@ class _ProfileState extends State<Profile> {
                           // Customize the color as needed
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Column(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -202,7 +213,7 @@ class _ProfileState extends State<Profile> {
                             ),
                             //hhhhhh
                             Text(
-                              'Additional Text 1',
+                              widget.addressLine1,
                               style: TextStyle(
                                   fontFamily: "terinary",
                                   fontSize: 15,
@@ -210,7 +221,7 @@ class _ProfileState extends State<Profile> {
                                   color: AppColors.textGrey),
                             ),
                             Text(
-                              'Additional Text 2',
+                              widget.addressLine2,
                               style: TextStyle(
                                   fontFamily: "terinary",
                                   fontSize: 15,
@@ -218,7 +229,7 @@ class _ProfileState extends State<Profile> {
                                   color: AppColors.textGrey),
                             ),
                             Text(
-                              'Additional Text 3',
+                              widget.addressLine3,
                               style: TextStyle(
                                   fontFamily: "terinary",
                                   fontSize: 15,

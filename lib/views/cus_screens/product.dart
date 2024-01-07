@@ -239,7 +239,7 @@ class _ProductState extends State<Product> {
                             child: Text(
                               '${widget.description}',
                               textAlign: TextAlign.justify,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: AppColors.textGrey,
                                 fontSize: 15,
                                 fontFamily: "secondary",

@@ -6,11 +6,16 @@ import 'package:smart_fit_on/views/authentication/login.dart';
 import 'package:smart_fit_on/views/components/custom_toast.dart';
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:smart_fit_on/views/cus_screens/profile.dart';
 import 'package:smart_fit_on/views/cus_screens/still_dev.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:smart_fit_on/models/buyer_data.dart';
 
 class FirebaseServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  User? currentUser = FirebaseAuth.instance.currentUser;
+
   PikdyToasts pikdyToasts = PikdyToasts();
   //sign up
 
@@ -149,5 +154,54 @@ class FirebaseServices {
     } catch (e) {
       print("Error signing out: $e");
     }
+  }
+
+  //get buyer basic data
+  Future<BuyerData?> fetchBuyerData(
+      BuildContext context, String username) async {
+    try {
+      // Reference to the BuyerBasicData collection
+      CollectionReference buyerBasicDataCollection =
+          FirebaseFirestore.instance.collection('BuyerBasicData');
+
+      // Query to get the document with the matching username
+      QuerySnapshot querySnapshot = await buyerBasicDataCollection
+          .where('username', isEqualTo: username)
+          .get();
+
+      print('Querying for username: $username');
+      print('Number of documents found: ${querySnapshot.docs.length}');
+
+      // Check if there's a matching document
+      if (querySnapshot.docs.isNotEmpty) {
+        // Extract additional data from the document
+        var documentData =
+            querySnapshot.docs.first.data() as Map<String, dynamic>?;
+
+        // Access individual fields
+        var addressLine1 = documentData?['addressLine1'] ?? '';
+        var addressLine2 = documentData?['addressLine2'] ?? '';
+        var addressLine3 = documentData?['addressLine3'] ?? '';
+        var firstName = documentData?['firstName'] ?? '';
+        var lastName = documentData?['lastName'] ?? '';
+
+        // Return the extracted data as BuyerData instance
+        return BuyerData(
+          addressLine1: addressLine1,
+          addressLine2: addressLine2,
+          addressLine3: addressLine3,
+          firstName: firstName,
+          lastName: lastName,
+        );
+      } else {
+        // No matching document found
+        print('No matching document found for username: $username');
+      }
+    } catch (e) {
+      print('Error fetching additional data: $e');
+    }
+
+    // Return null if an error occurs or no matching document is found
+    return null;
   }
 }

@@ -6,9 +6,10 @@ import 'package:smart_fit_on/views/components/single_tile.dart';
 import 'package:smart_fit_on/views/components/single_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:smart_fit_on/views/cus_screens/profile.dart';
+import 'package:smart_fit_on/controllers/firebase_services.dart';
 
 class CusHome extends StatefulWidget {
-  const CusHome({Key? key}) : super(key: key);
+  CusHome({Key? key}) : super(key: key);
 
   @override
   State<CusHome> createState() => _CusHomeState();
@@ -23,6 +24,7 @@ class _CusHomeState extends State<CusHome> {
     _future = FirebaseFirestore.instance.collection('productData').get();
   }
 
+  final FirebaseServices _firebaseServices = FirebaseServices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,12 +38,21 @@ class _CusHomeState extends State<CusHome> {
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    await _firebaseServices.fetchBuyerData(context, "username");
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Profile()),
+                      MaterialPageRoute(
+                          builder: (context) => Profile(
+                                addressLine1: "hello",
+                                addressLine2: "",
+                                addressLine3: "",
+                                firstName: "",
+                                lastName: '',
+                              )),
                     );
                   },
+                  /* error big error */
                   child: Container(
                     margin: EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
