@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:smart_fit_on/assets/colors/colors.dart';
+import 'package:smart_fit_on/views/components/custom_placeholder.dart';
 import 'package:smart_fit_on/views/components/long_btn.dart';
 import 'package:smart_fit_on/views/components/other_heading.dart';
 import 'package:smart_fit_on/views/components/reg_headline.dart';
 import 'package:smart_fit_on/views/cus_screens/cus_home.dart';
 import 'package:smart_fit_on/views/cus_screens/still_dev.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class Product extends StatefulWidget {
   final String name;
@@ -114,10 +116,14 @@ class _ProductState extends State<Product> {
                         ],
                       ),
                       child: Center(
-                        child: Image.asset(
-                          'lib/assets/images/shirt.png', // Replace with your actual image path
+                        child: CachedNetworkImage(
+                          imageUrl: widget
+                              .imageUrl, // Replace with your actual image path
                           height:
                               200, // Adjust the height of the image as needed
+                          placeholder: (context, url) => CustomPlaceholder(),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
                       ),
                     ),

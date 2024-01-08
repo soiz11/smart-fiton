@@ -130,7 +130,8 @@ class _ProfileState extends State<Profile> {
                                 height:
                                     0), // Adjust the spacing between Text widgets
                             Text(
-                              widget.firstName,
+                              "Pikdy Harloos",
+                              //widget.firstName,
                               style: TextStyle(
                                   fontFamily: "terinary",
                                   fontSize: 15,
@@ -213,7 +214,8 @@ class _ProfileState extends State<Profile> {
                             ),
                             //hhhhhh
                             Text(
-                              widget.addressLine1,
+                              '125/3 Pikdy road',
+                              //widget.addressLine1,
                               style: TextStyle(
                                   fontFamily: "terinary",
                                   fontSize: 15,
@@ -221,7 +223,8 @@ class _ProfileState extends State<Profile> {
                                   color: AppColors.textGrey),
                             ),
                             Text(
-                              widget.addressLine2,
+                              'cross junction',
+                              //widget.addressLine2,
                               style: TextStyle(
                                   fontFamily: "terinary",
                                   fontSize: 15,
@@ -229,7 +232,8 @@ class _ProfileState extends State<Profile> {
                                   color: AppColors.textGrey),
                             ),
                             Text(
-                              widget.addressLine3,
+                              "Colombo 3",
+                              // widget.addressLine3,
                               style: TextStyle(
                                   fontFamily: "terinary",
                                   fontSize: 15,

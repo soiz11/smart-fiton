@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smart_fit_on/assets/colors/colors.dart';
+import 'package:smart_fit_on/views/components/custom_placeholder.dart';
 import 'package:smart_fit_on/views/cus_screens/product.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class SingleTile extends StatelessWidget {
   final String name;
@@ -66,10 +68,13 @@ class SingleTile extends StatelessWidget {
                         flex: 7,
                         child: Align(
                           alignment: const Alignment(1.3, 0),
-                          child: Image.asset(
-                            "lib/assets/images/shirt.png",
+                          child: CachedNetworkImage(
+                            imageUrl: imageUrl, // Replace with your image URL
                             fit: BoxFit.fitHeight,
                             height: 100,
+                            placeholder: (context, url) => CustomPlaceholder(),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
                           ),
                         ),
                       ),
