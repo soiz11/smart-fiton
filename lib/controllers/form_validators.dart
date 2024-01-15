@@ -158,7 +158,7 @@ class FormValidators {
     return null;
   }
 
-  //validating login email and password
+  //validating login - email and password
   static String? validateLoginEmailAndPassword(String? value, String any) {
     //validate name (First name/last name)
     if (value == null || value.isEmpty) {

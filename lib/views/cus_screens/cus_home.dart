@@ -18,6 +18,7 @@ class CusHome extends StatefulWidget {
 class _CusHomeState extends State<CusHome> {
   late Future<QuerySnapshot> _future;
 
+  //firebase instance create for data fetch
   @override
   void initState() {
     super.initState();
@@ -30,6 +31,7 @@ class _CusHomeState extends State<CusHome> {
     return Scaffold(
       backgroundColor: AppColors.bodyGrey,
       appBar: AppBar(
+        //upper bar
         backgroundColor: AppColors.mainGreen,
         elevation: 0,
         actions: [
@@ -40,11 +42,13 @@ class _CusHomeState extends State<CusHome> {
                 GestureDetector(
                   onTap: () async {
                     await _firebaseServices.fetchBuyerData(context, "username");
+
+                    // ignore: use_build_context_synchronously
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => Profile(
-                                addressLine1: "hello",
+                                addressLine1: "",
                                 addressLine2: "",
                                 addressLine3: "",
                                 firstName: "",
@@ -52,16 +56,17 @@ class _CusHomeState extends State<CusHome> {
                               )),
                     );
                   },
-                  /* error big error */
+
+                  //profile icon section
                   child: Container(
-                    margin: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
+                    margin: const EdgeInsets.all(10.0),
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,
                     ),
                     child: ClipOval(
                       child: Image.asset(
-                        'lib/assets/images/girl.png', // replace with your image path
+                        'lib/assets/images/girl.png',
                         width: 40.0,
                         height: 40.0,
                         fit: BoxFit.cover,
@@ -69,22 +74,24 @@ class _CusHomeState extends State<CusHome> {
                     ),
                   ),
                 ),
-                // ... existing code
               ],
             ),
           ),
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 25),
+        padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 25),
         child: Align(
           alignment: Alignment.topCenter,
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                //top banner
                 const CusBanner(),
+
+                //firebase query for data fetch for grid view
                 FutureBuilder<QuerySnapshot>(
                   future: _future,
                   builder: (context, snapshot) {
@@ -115,10 +122,11 @@ class _CusHomeState extends State<CusHome> {
   }
 }
 
+//gridview layout
 class ProductGridView extends StatelessWidget {
   final List<QueryDocumentSnapshot> products;
 
-  const ProductGridView({Key? key, required this.products}) : super(key: key);
+  const ProductGridView({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {

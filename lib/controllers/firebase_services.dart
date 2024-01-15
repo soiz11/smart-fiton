@@ -1,15 +1,16 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/widgets.dart';
 import 'package:smart_fit_on/views/authentication/as_buyer.dart';
 import 'package:smart_fit_on/views/authentication/login.dart';
 //import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_fit_on/views/components/custom_toast.dart';
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:smart_fit_on/views/cus_screens/profile.dart';
-import 'package:smart_fit_on/views/cus_screens/still_dev.dart';
+//import 'package:smart_fit_on/views/cus_screens/profile.dart';
+//import 'package:smart_fit_on/views/cus_screens/still_dev.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:smart_fit_on/models/buyer_data.dart';
 
 class FirebaseServices {
@@ -17,8 +18,8 @@ class FirebaseServices {
   User? currentUser = FirebaseAuth.instance.currentUser;
 
   PikdyToasts pikdyToasts = PikdyToasts();
-  //sign up
 
+  //sign up
   Future<UserCredential?> createUser(String userNameBusinessEmailValue,
       String confirmPasswordValue, BuildContext context) async {
     try {
@@ -36,7 +37,6 @@ class FirebaseServices {
   }
 
   //Seller Basic data saving to firestore
-
   Future sellerBasicDataSaving(
     String userNameBusinessEmailValue,
     String mobileNoValue,
@@ -72,7 +72,6 @@ class FirebaseServices {
   }
 
   //Buyer Basic data saving to firestore
-
   Future buyerBasicDataSaving(
     String userNameBusinessEmailValue,
     String mobileNoValue,
@@ -141,7 +140,6 @@ class FirebaseServices {
   }
 
   //logout
-
   Future<void> signOut(BuildContext context) async {
     try {
       await _auth.signOut();
@@ -149,7 +147,7 @@ class FirebaseServices {
           Duration.zero); // This line allows the async gap to be closed
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Login()),
+        MaterialPageRoute(builder: (context) => const Login()),
       );
     } catch (e) {
       print("Error signing out: $e");
@@ -194,14 +192,11 @@ class FirebaseServices {
           lastName: lastName,
         );
       } else {
-        // No matching document found
         print('No matching document found for username: $username');
       }
     } catch (e) {
       print('Error fetching additional data: $e');
     }
-
-    // Return null if an error occurs or no matching document is found
     return null;
   }
 }

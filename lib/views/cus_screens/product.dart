@@ -3,8 +3,8 @@ import 'package:smart_fit_on/assets/colors/colors.dart';
 import 'package:smart_fit_on/views/components/custom_placeholder.dart';
 import 'package:smart_fit_on/views/components/long_btn.dart';
 import 'package:smart_fit_on/views/components/other_heading.dart';
-import 'package:smart_fit_on/views/components/reg_headline.dart';
-import 'package:smart_fit_on/views/cus_screens/cus_home.dart';
+//import 'package:smart_fit_on/views/components/reg_headline.dart';
+//import 'package:smart_fit_on/views/cus_screens/cus_home.dart';
 import 'package:smart_fit_on/views/cus_screens/still_dev.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -14,13 +14,13 @@ class Product extends StatefulWidget {
   final int price;
   final String imageUrl;
 
-  Product({
+  const Product({
+    super.key,
     required this.name,
     required this.description,
     required this.price,
     required this.imageUrl,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   State<Product> createState() => _ProductState();
@@ -45,24 +45,22 @@ class _ProductState extends State<Product> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // Add your header widget here
-
                     const SizedBox(height: 10),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment
-                          .end, // Align elements with space between
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
+                        //heading
                         OtherHeading(
-                          headerText: '${widget.name}',
+                          headerText: widget.name,
                           icon: Icons.play_arrow_rounded,
                           onTap: () {
                             Navigator.pop(context);
                           },
                         ),
-                        // Add space between elements
 
+                        //pricing circle
                         Container(
                           width: 64,
                           height: 64,
@@ -98,6 +96,7 @@ class _ProductState extends State<Product> {
 
                     const SizedBox(height: 20),
 
+                    //product tile
                     Container(
                       height: 250,
                       width: 250,
@@ -117,23 +116,23 @@ class _ProductState extends State<Product> {
                       ),
                       child: Center(
                         child: CachedNetworkImage(
-                          imageUrl: widget
-                              .imageUrl, // Replace with your actual image path
-                          height:
-                              200, // Adjust the height of the image as needed
-                          placeholder: (context, url) => CustomPlaceholder(),
+                          imageUrl: widget.imageUrl,
+                          height: 200,
+                          placeholder: (context, url) =>
+                              const CustomPlaceholder(),
                           errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
+                              const Icon(Icons.error),
                         ),
                       ),
                     ),
 
                     const SizedBox(height: 30),
 
+                    // container (about product + 2 Grouped buttons)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Text widget
+                        //about product
                         const SizedBox(width: 15),
                         const Expanded(
                           child: Text(
@@ -146,11 +145,9 @@ class _ProductState extends State<Product> {
                           ),
                         ),
 
-                        // Grouped containers
+                        // Grouped buttons only
                         Padding(
-                          padding: const EdgeInsets.only(
-                              right:
-                                  10.0), // Adjust the right padding as needed
+                          padding: const EdgeInsets.only(right: 10.0),
                           child: Row(
                             children: [
                               // Container with favourite button
@@ -159,7 +156,7 @@ class _ProductState extends State<Product> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => StillDev()),
+                                        builder: (context) => const StillDev()),
                                   );
                                 },
                                 child: Container(
@@ -196,7 +193,7 @@ class _ProductState extends State<Product> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => StillDev()),
+                                        builder: (context) => const StillDev()),
                                   );
                                 },
                                 child: Container(
@@ -232,9 +229,9 @@ class _ProductState extends State<Product> {
 
                     const SizedBox(height: 10),
 
+                    //product description
                     Padding(
-                      padding: const EdgeInsets.only(
-                          right: 10.0), // Adjust the right padding as needed
+                      padding: const EdgeInsets.only(right: 10.0),
                       child: Row(
                         children: [
                           const SizedBox(width: 15),
@@ -243,9 +240,9 @@ class _ProductState extends State<Product> {
                             width: MediaQuery.of(context).size.width * 0.8,
                             alignment: Alignment.topLeft,
                             child: Text(
-                              '${widget.description}',
+                              widget.description,
                               textAlign: TextAlign.justify,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: AppColors.textGrey,
                                 fontSize: 15,
                                 fontFamily: "secondary",
@@ -253,17 +250,16 @@ class _ProductState extends State<Product> {
                               overflow: TextOverflow
                                   .visible, // Set overflow to visible
                               softWrap:
-                                  true, // Allow text to wrap onto the next line
+                                  true, // Allow text to wrap onto the next line (shrink effect)
                             ),
                           ),
-
-                          // Add more widgets as needed
                         ],
                       ),
                     ),
 
                     const SizedBox(height: 30),
 
+                    //try on button
                     GestureDetector(
                       child: LongBtn(
                         btnColor: Colors.black,
@@ -273,15 +269,14 @@ class _ProductState extends State<Product> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => StillDev()),
+                            MaterialPageRoute(
+                                builder: (context) => const StillDev()),
                           );
                         },
                         isIcon: true,
                         icon: Icons.camera_alt,
                       ),
                     ),
-
-                    // Add other widgets or components here
                   ],
                 ),
               ),

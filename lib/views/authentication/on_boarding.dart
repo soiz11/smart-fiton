@@ -165,16 +165,20 @@ class _OnBoardingState extends State<OnBoarding> {
                                             confirmPasswordValue,
                                             context);
 
+                                    // ignore: use_build_context_synchronously
                                     FocusScope.of(context).unfocus();
 
                                     setState(() {});
 
                                     if (result != null) {
+                                      // ignore: avoid_print
                                       print('User created successfully!');
                                       // Perform the Firebase database update here
+                                      // ignore: avoid_print
                                       print('Submitting to Firebase database');
                                       if (widget.isSeller) {
                                         // Navigate to the Seller page
+                                        // ignore: use_build_context_synchronously
                                         Navigator.of(context).pushReplacement(
                                           MaterialPageRoute(
                                             builder: (BuildContext context) =>
@@ -188,6 +192,7 @@ class _OnBoardingState extends State<OnBoarding> {
                                         );
                                       } else if (widget.isBuyer) {
                                         // Navigate to the Buyer page
+                                        // ignore: use_build_context_synchronously
                                         Navigator.of(context).pushReplacement(
                                           MaterialPageRoute(
                                             builder: (BuildContext context) => AsBuyer(

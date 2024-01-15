@@ -10,11 +10,11 @@ class StillDev extends StatelessWidget {
       backgroundColor: AppColors.bodyGrey,
       body: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 5.0),
+          padding: const EdgeInsets.symmetric(horizontal: 5.0),
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 35.0),
+            padding: const EdgeInsets.symmetric(vertical: 35.0),
             width: 450,
-            child: Text(
+            child: const Text(
               "Still in Development",
               style: TextStyle(
                   fontFamily: "secondary",

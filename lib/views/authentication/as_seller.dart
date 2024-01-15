@@ -214,10 +214,12 @@ class _AsSellerState extends State<AsSeller> {
                                               customerType,
                                               context);
 
+                                      // ignore: use_build_context_synchronously
                                       FocusScope.of(context).unfocus();
 
                                       setState(() {});
 
+                                      // ignore: use_build_context_synchronously
                                       Navigator.of(context)
                                           .pushReplacement(MaterialPageRoute(
                                         builder: (BuildContext context) =>

@@ -107,6 +107,7 @@ class _LongCardState extends State<LongCard> {
                       child: Row(
                         children: [
                           isFavourites
+                              // ignore: avoid_unnecessary_containers
                               ? Container(
                                   child: Row(
                                     children: [

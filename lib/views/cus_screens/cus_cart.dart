@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:smart_fit_on/views/components/long_card.dart';
-import 'package:smart_fit_on/views/components/short_btn.dart';
+//import 'package:smart_fit_on/views/components/short_btn.dart';
 import 'package:smart_fit_on/assets/colors/colors.dart';
+
+//NOT USED
 
 class CusCart extends StatefulWidget {
   const CusCart({super.key});
@@ -18,17 +20,17 @@ class _CusCartState extends State<CusCart> {
       home: Scaffold(
           backgroundColor: AppColors.bodyGrey,
           body: Padding(
-            padding: const EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
               horizontal: 25.0,
             ),
             child: Center(
               child: SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
+                physics: AlwaysScrollableScrollPhysics(),
                 child: Column(
                   //mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 30),
+                    SizedBox(height: 30),
                     /* 
                     GestureDetector(
                       child: ShortBtn(

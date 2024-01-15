@@ -27,6 +27,7 @@ String passwordFieldValue = '';
 class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async {
         // Check if the user is signed in
@@ -112,6 +113,7 @@ class _LoginState extends State<Login> {
                                   passwordFieldValue,
                                   context,
                                 );
+                                // ignore: use_build_context_synchronously
                                 FocusScope.of(context).unfocus();
                                 if (user != null) {
                                   String userType =
@@ -119,17 +121,19 @@ class _LoginState extends State<Login> {
                                     emailFieldValue,
                                   );
                                   if (userType == 'Seller') {
+                                    // ignore: use_build_context_synchronously
                                     Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
                                         builder: (BuildContext context) =>
-                                            SellerDashboard(),
+                                            const SellerDashboard(),
                                       ),
                                     );
                                   } else if (userType == 'Buyer') {
+                                    // ignore: use_build_context_synchronously
                                     Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
                                         builder: (BuildContext context) =>
-                                            CusBottomNavBar(),
+                                            const CusBottomNavBar(),
                                       ),
                                     );
                                   }
