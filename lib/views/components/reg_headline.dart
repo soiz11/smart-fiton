@@ -26,7 +26,6 @@ class RegHeading extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Wrap the icon with a GestureDetector widget
                 GestureDetector(
                   onTap: onTap,
                   child: Transform(
@@ -39,7 +38,6 @@ class RegHeading extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 Text(
                   headerText,
                   style: const TextStyle(
@@ -58,8 +56,6 @@ class RegHeading extends StatelessWidget {
             )
           ],
         )
-
-        // Add your additional widget here
       ],
     );
   }

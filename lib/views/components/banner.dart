@@ -7,8 +7,8 @@ class CusBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 20.0, bottom: 8.0),
-      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 12),
+      margin: const EdgeInsets.only(top: 20.0, bottom: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
       height: 160,
       decoration: BoxDecoration(
         color: AppColors.bodyGrey,
@@ -25,6 +25,7 @@ class CusBanner extends StatelessWidget {
       ),
       child: Row(
         children: [
+          //left side of row
           Expanded(
             flex: 5,
             child: Container(
@@ -39,7 +40,7 @@ class CusBanner extends StatelessWidget {
                       decoration: const BoxDecoration(
                           // color: Color.fromARGB(255, 243, 114, 33),
                           ),
-                      padding: EdgeInsets.only(top: 30.0),
+                      padding: const EdgeInsets.only(top: 30.0),
                       child: const Align(
                         alignment: Alignment.centerLeft,
                         child: // Adjust padding as needed
@@ -59,13 +60,12 @@ class CusBanner extends StatelessWidget {
                     flex: 1,
                     child: Container(
                       decoration: const BoxDecoration(
-                          // color: Color.fromARGB(255, 33, 243, 89),
+                          //color: Color.fromARGB(255, 33, 243, 89), uses for margin identification
                           ),
-                      padding: EdgeInsets.only(bottom: 50.0),
+                      padding: const EdgeInsets.only(bottom: 50.0),
                       child: const Align(
                         alignment: Alignment.centerLeft,
-                        child: // Adjust padding as needed
-                            Text(
+                        child: Text(
                           'Product 1 is simply dummy text  printing and typesetting ',
                           style: TextStyle(
                             color: AppColors.textGrey,
@@ -81,6 +81,8 @@ class CusBanner extends StatelessWidget {
               ),
             ),
           ),
+
+          //right side of row
           Expanded(
             flex: 6,
             child: Container(
@@ -89,12 +91,9 @@ class CusBanner extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Image.asset(
-                "lib/assets/images/poster_girl.png", // Replace with the actual asset path of your image
+                "lib/assets/images/poster_girl.png",
                 fit: BoxFit.fitHeight,
-
                 alignment: Alignment.bottomRight,
-
-                // Adjust the fit as needed
               ),
             ),
           ),

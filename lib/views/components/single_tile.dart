@@ -11,18 +11,18 @@ class SingleTile extends StatelessWidget {
   final String imageUrl;
 
   const SingleTile({
+    super.key,
     required this.name,
     required this.description,
     required this.price,
     required this.imageUrl,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 5),
-      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 5),
+      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
       height: 180,
       decoration: BoxDecoration(
         color: AppColors.bodyGrey,
@@ -53,17 +53,17 @@ class SingleTile extends StatelessWidget {
         },
         child: Column(
           children: [
+            //column upper part
             Expanded(
               flex: 5,
               child: Container(
-                decoration: const BoxDecoration(
-                    // Your outer container decoration goes here
-                    ),
+                decoration: const BoxDecoration(),
                 padding: const EdgeInsets.symmetric(vertical: 3.0),
                 child: Align(
                   alignment: Alignment.center,
                   child: Row(
                     children: [
+                      //left row part
                       Expanded(
                         flex: 7,
                         child: Align(
@@ -72,12 +72,15 @@ class SingleTile extends StatelessWidget {
                             imageUrl: imageUrl, // Replace with your image URL
                             fit: BoxFit.fitHeight,
                             height: 100,
-                            placeholder: (context, url) => CustomPlaceholder(),
+                            placeholder: (context, url) =>
+                                const CustomPlaceholder(),
                             errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
+                                const Icon(Icons.error),
                           ),
                         ),
                       ),
+
+                      //right row part
                       Expanded(
                         flex: 2,
                         child: Align(
@@ -111,6 +114,8 @@ class SingleTile extends StatelessWidget {
                 ),
               ),
             ),
+
+            //lower column
             Expanded(
               flex: 2,
               child: Container(

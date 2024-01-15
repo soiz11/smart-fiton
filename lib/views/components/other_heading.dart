@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smart_fit_on/assets/colors/colors.dart';
 
 class OtherHeading extends StatelessWidget {
   final String headerText;
@@ -26,7 +25,6 @@ class OtherHeading extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Wrap the icon with a GestureDetector widget
                 GestureDetector(
                   onTap: onTap,
                   child: Transform(
@@ -39,7 +37,6 @@ class OtherHeading extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 Text(
                   headerText,
                   style: const TextStyle(
@@ -50,12 +47,8 @@ class OtherHeading extends StatelessWidget {
                 ),
               ],
             ),
-
-            //line
           ],
         )
-
-        // Add your additional widget here
       ],
     );
   }

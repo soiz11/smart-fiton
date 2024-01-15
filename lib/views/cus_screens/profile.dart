@@ -5,7 +5,6 @@ import 'package:smart_fit_on/views/components/long_btn.dart';
 import 'package:smart_fit_on/views/components/other_heading.dart';
 import 'package:smart_fit_on/views/cus_screens/still_dev.dart';
 import 'package:smart_fit_on/controllers/firebase_services.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class Profile extends StatefulWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -16,6 +15,7 @@ class Profile extends StatefulWidget {
   final String lastName;
 
   Profile({
+    super.key,
     required this.addressLine1,
     required this.addressLine2,
     required this.addressLine3,
@@ -52,8 +52,10 @@ class _ProfileState extends State<Profile> {
           padding: const EdgeInsets.symmetric(horizontal: 25.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
+            children: [
               const SizedBox(height: 10),
+
+              //heading
               OtherHeading(
                 headerText: 'MY PROFILE',
                 icon: Icons.play_arrow_rounded,
@@ -61,14 +63,15 @@ class _ProfileState extends State<Profile> {
                   Navigator.pop(context);
                 },
               ),
-              const SizedBox(height: 0),
+
+              //image container
               Container(
-                margin: EdgeInsets.all(10.0),
+                margin: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.white,
                   border: Border.all(
-                    color: Color.fromARGB(255, 163, 163, 163),
+                    color: AppColors.darkGrey,
                     width: 6.0,
                   ),
                 ),
@@ -81,12 +84,15 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+
+              const SizedBox(height: 5),
+
+              //details container
               Container(
-                height: 250,
+                height: 260,
                 width: 260,
                 padding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 0.0),
+                    const EdgeInsets.symmetric(vertical: 5, horizontal: 0.0),
                 decoration: BoxDecoration(
                   color: AppColors.bodyGrey,
                   border: Border.all(color: Colors.white, width: 3),
@@ -105,16 +111,15 @@ class _ProfileState extends State<Profile> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      //name
+                      //name container
                       Container(
                         width: 180,
-                        padding: EdgeInsets.all(8),
-                        margin: EdgeInsets.symmetric(horizontal: 0),
+                        padding: const EdgeInsets.all(8),
+                        margin: const EdgeInsets.symmetric(horizontal: 0),
                         decoration: BoxDecoration(
-                          // Customize the color as needed
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Column(
+                        child: const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -126,9 +131,6 @@ class _ProfileState extends State<Profile> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(
-                                height:
-                                    0), // Adjust the spacing between Text widgets
                             Text(
                               "Pikdy Harloos",
                               //widget.firstName,
@@ -141,21 +143,18 @@ class _ProfileState extends State<Profile> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 0),
-                      // Adjust the spacing between Text widgets
 
-                      //username
+                      //username conatainer
                       Container(
-                        padding: EdgeInsets.all(8),
-                        margin: EdgeInsets.symmetric(horizontal: 0),
+                        padding: const EdgeInsets.all(8),
+                        margin: const EdgeInsets.symmetric(horizontal: 0),
                         decoration: BoxDecoration(
-                          // Customize the color as needed
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Username',
                               style: TextStyle(
                                 fontFamily: "secondary",
@@ -163,21 +162,24 @@ class _ProfileState extends State<Profile> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 0),
+
+                            //username fetch from firebase
                             FutureBuilder(
                               future: _userEmailFuture,
                               builder:
                                   (context, AsyncSnapshot<String?> snapshot) {
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
-                                  return CircularProgressIndicator();
+                                  return const CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
                                   return Text('Error: ${snapshot.error}');
                                 } else {
                                   String? userEmail = snapshot.data;
+
+                                  //dispalay username from database
                                   return Text(
-                                    '${userEmail}',
-                                    style: TextStyle(
+                                    userEmail ?? "No email available",
+                                    style: const TextStyle(
                                         fontFamily: "terinary",
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
@@ -185,22 +187,20 @@ class _ProfileState extends State<Profile> {
                                   );
                                 }
                               },
-                            ), // Adjust the spacing between Text widgets
+                            ),
                           ],
                         ),
                       ),
 
-                      SizedBox(height: 0),
-
-                      //address
+                      //address container
                       Container(
-                        padding: EdgeInsets.all(8),
-                        margin: EdgeInsets.symmetric(horizontal: 0),
+                        padding: const EdgeInsets.all(8),
+                        margin: const EdgeInsets.symmetric(horizontal: 0),
                         decoration: BoxDecoration(
                           // Customize the color as needed
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Column(
+                        child: const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -212,7 +212,8 @@ class _ProfileState extends State<Profile> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            //hhhhhh
+
+                            //3 address lines from database
                             Text(
                               '125/3 Pikdy road',
                               //widget.addressLine1,
@@ -240,7 +241,6 @@ class _ProfileState extends State<Profile> {
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.textGrey),
                             ),
-                            // Adjust the spacing between Text widgets
                           ],
                         ),
                       ),
@@ -248,7 +248,10 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
+
+              const SizedBox(height: 25),
+
+              //edit button
               GestureDetector(
                 child: LongBtn(
                   btnColor: Colors.black,
@@ -263,7 +266,10 @@ class _ProfileState extends State<Profile> {
                   },
                 ),
               ),
+
               const SizedBox(height: 15),
+
+              //signout button
               GestureDetector(
                 child: LongBtn(
                   btnColor: AppColors.mainGreen,

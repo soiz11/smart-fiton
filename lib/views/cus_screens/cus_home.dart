@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:smart_fit_on/assets/colors/colors.dart';
-import 'package:smart_fit_on/views/components/custom_text_feild.dart';
+
 import 'package:smart_fit_on/views/components/banner.dart';
 import 'package:smart_fit_on/views/components/single_tile.dart';
-import 'package:smart_fit_on/views/components/single_tile.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:smart_fit_on/views/cus_screens/profile.dart';
 import 'package:smart_fit_on/controllers/firebase_services.dart';
 
 class CusHome extends StatefulWidget {
-  CusHome({Key? key}) : super(key: key);
+  const CusHome({super.key});
 
   @override
   State<CusHome> createState() => _CusHomeState();

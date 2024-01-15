@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//NEVER USE , SET FOR CHEKOUT AND CART
 
 // ignore: must_be_immutable
 class ShortBtn extends StatelessWidget {

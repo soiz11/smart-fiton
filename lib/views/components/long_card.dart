@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:smart_fit_on/assets/colors/colors.dart';
 import 'package:smart_fit_on/views/components/short_btn.dart';
 
+// FAVOUTITE AND CHECKOUT TEPLATE , BUT NEVER USED
+
 class LongCard extends StatefulWidget {
   const LongCard({super.key});
 
@@ -15,7 +17,7 @@ class _LongCardState extends State<LongCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
       height: 160,
       decoration: BoxDecoration(
         color: AppColors.bodyGrey,
@@ -40,8 +42,8 @@ class _LongCardState extends State<LongCard> {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Image.asset(
-                "lib/assets/images/shirt.png", // Replace with the actual asset path of your image
-                fit: BoxFit.cover, // Adjust the fit as needed
+                "lib/assets/images/shirt.png",
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -83,8 +85,7 @@ class _LongCardState extends State<LongCard> {
                           ),
                       child: const Align(
                         alignment: Alignment.centerLeft,
-                        child: // Adjust padding as needed
-                            Text(
+                        child: Text(
                           'Phhdjdjcdsijdsocjjsijsiojs shfusdfhdsai hdushdsdh djhdhd sdsjhsadhisad  dhjsidjsada djsdia uhfiudsfn jdsipdfjsifdj',
                           style: TextStyle(
                             color: AppColors.textGrey,
