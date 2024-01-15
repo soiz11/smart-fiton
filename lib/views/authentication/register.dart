@@ -39,7 +39,6 @@ class _RegisterState extends State<Register> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      //const SizedBox(height: 100),
                       const SizedBox(height: 230),
 
                       // Onboard text
@@ -64,29 +63,12 @@ class _RegisterState extends State<Register> {
                         ),
                       ),
 
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 25),
 
-                      //logo
-
-                      /*      const SizedBox(height: 20),
-
-                      Center(
-                        child: Image.asset(
-                          "lib/assets/images/PIKDY.png",
-                          width: 200,
-                        ),
-                      ),
-
-                      const SizedBox(height: 45),
-                */
-                      const SizedBox(height: 15),
-
+                      //button buyer
                       GestureDetector(
                         child: LongBtn(
-                          btnColor: AppColors.mainGreen,
                           btnText: "BUYER",
-                          btnTextColor: Colors.white,
-                          isBorderRequired: false,
                           onTap: () {
                             setState(() {
                               isBuyer = !isBuyer;
@@ -102,6 +84,8 @@ class _RegisterState extends State<Register> {
                       ),
 
                       const SizedBox(height: 15),
+
+                      //button seller
 
                       GestureDetector(
                         child: LongBtn(
@@ -126,7 +110,7 @@ class _RegisterState extends State<Register> {
 
                       const SizedBox(height: 20),
 
-                      //clickable text
+                      //do you have account
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -164,7 +148,7 @@ class _RegisterState extends State<Register> {
                 ),
               ),
 
-              // Add other widgets here
+              // image added to botttom
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,

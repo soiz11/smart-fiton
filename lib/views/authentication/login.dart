@@ -5,7 +5,6 @@ import 'package:smart_fit_on/views/sel_screens/seller_dashboard.dart';
 
 import 'package:smart_fit_on/views/components/custom_text_feild.dart';
 
-import 'dart:developer' as dev;
 import 'package:smart_fit_on/views/components/long_btn.dart';
 import 'package:smart_fit_on/assets/colors/colors.dart';
 import 'package:smart_fit_on/controllers/form_validators.dart';
@@ -35,7 +34,7 @@ class _LoginState extends State<Login> {
         if (currentUser == null) {
           // If the user is not signed in, navigate to the login page
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => Login()),
+            MaterialPageRoute(builder: (context) => const Login()),
           );
           return false; // Prevent going back
         }
@@ -56,6 +55,8 @@ class _LoginState extends State<Login> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox(height: 0),
+
+                    //Pikdy image and tag line
                     Image.asset(
                       "lib/assets/images/PIKDY.png",
                       width: 200,
@@ -69,6 +70,8 @@ class _LoginState extends State<Login> {
                           fontSize: 20),
                     ),
                     const SizedBox(height: 15),
+
+                    //Form content
                     Form(
                       key: _formKey,
                       child: Column(
@@ -98,11 +101,10 @@ class _LoginState extends State<Login> {
                             },
                           ),
                           const SizedBox(height: 20),
+
+                          //Button with validation and submission
                           LongBtn(
-                            btnColor: AppColors.mainGreen,
                             btnText: "LOGIN",
-                            btnTextColor: Colors.white,
-                            isBorderRequired: false,
                             onTap: () async {
                               if (_formKey.currentState!.validate()) {
                                 User? user = await _firebaseServices.logIn(
@@ -139,6 +141,8 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     const SizedBox(height: 15),
+
+                    //Do you have an account section
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

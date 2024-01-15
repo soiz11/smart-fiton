@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:smart_fit_on/assets/colors/colors.dart';
 
 class CustomTextField extends StatefulWidget {
   final String hintText;
   final String? Function(String?)? validator;
+  final TextStyle? errorTextStyle;
   final ValueChanged<String> onChanged;
 
   const CustomTextField(
-      {Key? key,
+      {super.key,
+      this.errorTextStyle = const TextStyle(color: AppColors.errorRed),
       required this.hintText,
       required this.validator,
-      required this.onChanged})
-      : super(key: key);
+      required this.onChanged});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -36,6 +36,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         fillColor: AppColors.fieldWhite,
         errorBorder: InputBorder.none,
         focusedErrorBorder: InputBorder.none,
+        errorStyle: widget.errorTextStyle,
       ),
       validator: widget.validator,
       onChanged: widget.onChanged,

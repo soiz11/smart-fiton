@@ -9,7 +9,7 @@ import 'dart:developer' as dev;
 import 'package:smart_fit_on/views/components/long_btn.dart';
 import 'package:smart_fit_on/controllers/form_validators.dart';
 import 'package:smart_fit_on/controllers/firebase_services.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 
 // ignore: must_be_immutable
 class OnBoarding extends StatefulWidget {
@@ -59,14 +59,15 @@ class _OnBoardingState extends State<OnBoarding> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    //form elements
+
                     Form(
                       key: _formKey,
                       child: Column(
                         children: [
-                          //header),
-
                           const SizedBox(height: 80),
 
+                          //header
                           RegHeading(
                             headerText: "ON BOARDING .....",
                             icon: Icons.play_arrow_rounded,
@@ -78,11 +79,27 @@ class _OnBoardingState extends State<OnBoarding> {
                             },
                           ),
 
-                          const SizedBox(height: 60),
+                          //error text due to validations
+                          if (errorMessage.isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                errorMessage,
+                                style: const TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+
+                          const SizedBox(height: 50),
+
+                          //textfeild set
 
                           CustomTextField(
                             hintText: 'Username / Business Email',
                             validator: _formValidators.validateEmail,
+                            // testing purpose, errorTextStyle: const TextStyle(color: Colors.blue),
                             onChanged: (value) {
                               setState(
                                 () {
@@ -94,17 +111,6 @@ class _OnBoardingState extends State<OnBoarding> {
                             },
                           ),
 
-                          if (errorMessage.isNotEmpty)
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                errorMessage,
-                                style: const TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
                           const SizedBox(height: 10),
 
                           CustomTextField(
@@ -160,10 +166,7 @@ class _OnBoardingState extends State<OnBoarding> {
 
                           GestureDetector(
                             child: LongBtn(
-                                btnColor: AppColors.mainGreen,
                                 btnText: "NEXT",
-                                btnTextColor: Colors.white,
-                                isBorderRequired: false,
                                 isIcon: true,
                                 icon: Icons.play_arrow_rounded,
                                 onTap: () async {
@@ -210,39 +213,11 @@ class _OnBoardingState extends State<OnBoarding> {
                                       }
                                     }
                                   }
-                                }
-                                /*
-                                if (widget.isSeller) {
-                                  // Navigate to the Seller page
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          const AsSeller(),
-                                    ),
-                                  );
-
-                                  setState(() {
-                                    widget.isSeller = false;
-                                  });
-                                } else if (widget.isBuyer) {
-                                  // Navigate to the Buyer page
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          const AsBuyer(),
-                                    ),
-                                  );
-
-                                  setState(() {
-                                    widget.isBuyer = false;
-                                  });
-                                }*/
-                                ),
+                                }),
                           ),
                         ],
                       ),
                     ),
-                    // Add other widgets here
                   ],
                 ),
               ),

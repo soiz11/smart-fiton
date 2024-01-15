@@ -8,7 +8,7 @@ class CusBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 20.0, bottom: 8.0),
-      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 12),
       height: 160,
       decoration: BoxDecoration(
         color: AppColors.bodyGrey,
@@ -26,7 +26,7 @@ class CusBanner extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            flex: 2,
+            flex: 5,
             child: Container(
               decoration: const BoxDecoration(
                   //color: Colors.green,
@@ -47,7 +47,7 @@ class CusBanner extends StatelessWidget {
                           'FASHION THURSDAY',
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 25,
+                            fontSize: 23,
                             fontFamily: "main",
                             fontWeight: FontWeight.bold,
                           ),
@@ -82,7 +82,7 @@ class CusBanner extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 2,
+            flex: 6,
             child: Container(
               decoration: BoxDecoration(
                 //color: Colors.blue,
@@ -91,7 +91,7 @@ class CusBanner extends StatelessWidget {
               child: Image.asset(
                 "lib/assets/images/poster_girl.png", // Replace with the actual asset path of your image
                 fit: BoxFit.fitHeight,
-                height: 140,
+
                 alignment: Alignment.bottomRight,
 
                 // Adjust the fit as needed
