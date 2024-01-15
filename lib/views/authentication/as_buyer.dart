@@ -66,9 +66,9 @@ class _AsBuyerState extends State<AsBuyer> {
                           key: _formKey,
                           child: Column(
                             children: [
-                              //header
-
                               const SizedBox(height: 30),
+
+                              //header
                               RegHeading(
                                 headerText: "BUYER",
                                 icon: Icons.play_arrow_rounded,
@@ -87,6 +87,7 @@ class _AsBuyerState extends State<AsBuyer> {
 
                               const SizedBox(height: 50),
 
+                              //form feild
                               CustomTextField(
                                 hintText: 'First Name',
                                 validator: (String? value) =>
@@ -134,8 +135,6 @@ class _AsBuyerState extends State<AsBuyer> {
                                   );
                                 },
                               ),
-
-                              // Add other CustomTextField widgets
 
                               const SizedBox(height: 30),
 
@@ -189,6 +188,7 @@ class _AsBuyerState extends State<AsBuyer> {
 
                               const SizedBox(height: 30),
 
+                              //submit button
                               GestureDetector(
                                 child: LongBtn(
                                     btnColor: AppColors.mainGreen,
@@ -214,7 +214,7 @@ class _AsBuyerState extends State<AsBuyer> {
                                         FocusScope.of(context).unfocus();
 
                                         setState(() {});
-                                        // Add your logic here
+
                                         Navigator.of(context)
                                             .pushReplacement(MaterialPageRoute(
                                           builder: (BuildContext context) =>
@@ -223,8 +223,6 @@ class _AsBuyerState extends State<AsBuyer> {
                                       }
                                     }),
                               ),
-
-                              // Add other widgets here
                             ],
                           ),
                         ),

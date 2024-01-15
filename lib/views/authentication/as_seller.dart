@@ -40,6 +40,7 @@ class _AsSellerState extends State<AsSeller> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      //wrapper
       decoration: const BoxDecoration(
         color: AppColors.bodyGrey,
         image: DecorationImage(
@@ -68,9 +69,9 @@ class _AsSellerState extends State<AsSeller> {
                           key: _formKey,
                           child: Column(
                             children: [
-                              //header
-
                               const SizedBox(height: 30),
+
+                              //header
                               RegHeading(
                                 headerText: "SELLER",
                                 icon: Icons.play_arrow_rounded,
@@ -89,6 +90,7 @@ class _AsSellerState extends State<AsSeller> {
 
                               const SizedBox(height: 50),
 
+                              //form feilds
                               CustomTextField(
                                 hintText: 'Full Name',
                                 validator: _formValidators.validateFullName,
@@ -189,6 +191,7 @@ class _AsSellerState extends State<AsSeller> {
 
                               const SizedBox(height: 30),
 
+                              //submit button
                               GestureDetector(
                                 child: LongBtn(
                                   btnColor: Colors.black,
@@ -214,7 +217,7 @@ class _AsSellerState extends State<AsSeller> {
                                       FocusScope.of(context).unfocus();
 
                                       setState(() {});
-                                      // Add your logic here
+
                                       Navigator.of(context)
                                           .pushReplacement(MaterialPageRoute(
                                         builder: (BuildContext context) =>
@@ -224,8 +227,6 @@ class _AsSellerState extends State<AsSeller> {
                                   },
                                 ),
                               ),
-
-                              // Add other widgets here
                             ],
                           ),
                         ),

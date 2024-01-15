@@ -38,13 +38,12 @@ class CusBanner extends StatelessWidget {
                     flex: 1,
                     child: Container(
                       decoration: const BoxDecoration(
-                          // color: Color.fromARGB(255, 243, 114, 33),
+                          // color: Color.fromARGB(255, 243, 114, 33), uses for margin identification
                           ),
                       padding: const EdgeInsets.only(top: 30.0),
                       child: const Align(
                         alignment: Alignment.centerLeft,
-                        child: // Adjust padding as needed
-                            Text(
+                        child: Text(
                           'FASHION THURSDAY',
                           style: TextStyle(
                             color: Colors.black,

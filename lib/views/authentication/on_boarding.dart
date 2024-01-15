@@ -79,19 +79,6 @@ class _OnBoardingState extends State<OnBoarding> {
                             },
                           ),
 
-                          //error text due to validations
-                          if (errorMessage.isNotEmpty)
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                errorMessage,
-                                style: const TextStyle(
-                                  color: Colors.blue,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-
                           const SizedBox(height: 50),
 
                           //textfeild set
@@ -164,6 +151,7 @@ class _OnBoardingState extends State<OnBoarding> {
 
                           const SizedBox(height: 30),
 
+                          //nect button
                           GestureDetector(
                             child: LongBtn(
                                 btnText: "NEXT",
