@@ -66,8 +66,6 @@ class _AsBuyerState extends State<AsBuyer> {
                           key: _formKey,
                           child: Column(
                             children: [
-                              const SizedBox(height: 30),
-
                               //header
                               RegHeading(
                                 headerText: "BUYER",
@@ -85,7 +83,7 @@ class _AsBuyerState extends State<AsBuyer> {
                                 },
                               ),
 
-                              const SizedBox(height: 50),
+                              const SizedBox(height: 40),
 
                               //form feild
                               CustomTextField(
